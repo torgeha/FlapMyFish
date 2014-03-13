@@ -88,8 +88,9 @@ public class GameThread extends Thread implements KeyboardListener, TouchListene
 					// Update the game.
 					states.peek().update(timer.getDelta());
 					
+					
 					// Draw the game.
-					states.peek().draw(canvas);						
+					if (canvas != null) states.peek().draw(canvas);						
 				}
 				
 			} finally {
