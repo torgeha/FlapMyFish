@@ -13,7 +13,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		//This is a new Instance
 		game = new Game(this, null);
 		
 //		game.pushState(new MainMenuScreen());
