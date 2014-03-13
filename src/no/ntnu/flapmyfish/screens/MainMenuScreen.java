@@ -1,4 +1,4 @@
-package no.ntnu.flampmyfish.screens;
+package no.ntnu.flapmyfish.screens;
 
 import sheep.game.State;
 

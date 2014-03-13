@@ -1,6 +1,6 @@
 package no.ntnu.flapmyfish;
 
-import no.ntnu.flampmyfish.screens.MainMenuScreen;
+import no.ntnu.flapmyfish.screens.MainMenuScreen;
 import sheep.game.Game;
 import android.app.Activity;
 import android.os.Bundle;
