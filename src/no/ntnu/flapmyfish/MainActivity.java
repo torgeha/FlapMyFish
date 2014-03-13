@@ -1,5 +1,6 @@
 package no.ntnu.flapmyfish;
 
+import no.ntnu.flapmyfish.screens.GameScreen;
 import no.ntnu.flapmyfish.screens.MainMenuScreen;
 import sheep.game.Game;
 import android.app.Activity;
@@ -15,7 +16,8 @@ public class MainActivity extends Activity {
 		
 		game = new Game(this, null);
 		
-		game.pushState(new MainMenuScreen());
+//		game.pushState(new MainMenuScreen());
+		game.pushState(new GameScreen());
 		setContentView(game);
 		
 	}
