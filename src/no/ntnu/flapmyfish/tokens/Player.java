@@ -23,8 +23,8 @@ public class Player extends Fish {
 	
 	public void update(float dt) {
 		//apply physics
-		//check collision
-		//add points
+		//check collision??
+		//add points based on distance traveled
 		
 		
 		update(dt);
