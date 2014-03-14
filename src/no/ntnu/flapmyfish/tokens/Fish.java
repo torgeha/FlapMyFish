@@ -7,6 +7,7 @@ public class Fish extends Token {
 	private float xPosition;
 	private float yPosition;
 	private float xSpeed;
+	private float ySpeed;
 	
 	public Fish(Image img) {
 		this(img, 0,0,0);
@@ -18,6 +19,13 @@ public class Fish extends Token {
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
 	}
+	
+	public void move(){
+		
+		xPosition += xSpeed;
+		yPosition += ySpeed;
+	}
+
 
 	public float getxPosition() {
 		return xPosition;
