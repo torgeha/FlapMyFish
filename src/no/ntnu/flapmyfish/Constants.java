@@ -11,5 +11,9 @@ public class Constants {
 
 	public static int WINDOW_WIDTH;
 	public static int WINDOW_HEIGHT;
+	
+	
+	//Default volume for sound
+	public static final float DEFAULT_VOLUME = 0.4f;
 
 }

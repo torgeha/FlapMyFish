@@ -1,12 +1,23 @@
 package no.ntnu.flapmyfish.tokens;
 
 import no.ntnu.flapmyfish.Constants;
+import no.ntnu.flapmyfish.MainActivity;
+import no.ntnu.flapmyfish.screens.GameScreen;
 import android.graphics.Canvas;
+import android.graphics.Point;
+import android.view.Display;
 import android.view.MotionEvent;
+import sheep.audio.Audio;
 import sheep.game.Sprite;
 import sheep.graphics.Image;
 
 public class Player extends Fish {
+	
+	
+	private static int sound = -1;
+	private float ySpeed;
+
+
 	
 	public Player(Image img) {
 		super(img);		
@@ -15,6 +26,15 @@ public class Player extends Fish {
 		//player should sink at first
 		stopFlap();
 		
+
+		if(sound == -1){
+			//sound = GameScreen.soundPool.load(this, R.raw.fish, 1); -- Her må det riktige inn objectet(this) muligens endres ettersom vi bestemmer hvor vi ønsker lyd
+		}
+		
+	}
+	
+	private void playSound(){
+		GameScreen.soundPool.play(sound, MainActivity.volume, MainActivity.volume, 0, 0, 1);
 	}
 	
 	public void draw(Canvas canvas) {
@@ -30,29 +50,10 @@ public class Player extends Fish {
 		update(dt);
 	}
 	
-	//Is it necessary to check both ways?
-	public void collided(Sprite a, Sprite b) {
-		//Check if the collision involves the player
-		if (!(a == this || b == this)) {
-			return;
-		}
-		else if (a == this && b instanceof Enemy) {
-			//Die
-		}
-		else if (a == this && b instanceof Food) {
-			//Extra point
-		}
-		else if (a instanceof Enemy && b == this) {
-			//DIE
-		}
-		else if (a instanceof Food && b == this) {
-			//extra point
-		}
-		
-	}
-	
+
 	public boolean onTouchDown(MotionEvent event) {
 		flap();
+		playSound();
 		return false;
 	}
 	
@@ -68,4 +69,14 @@ public class Player extends Fish {
 	private void flap() {
 		setSpeed(0, Constants.PLAYER_FLAP_SPEED);
 	}
+	
+	public void move(){
+
+        TO-DO
+        --
+		super.move(); 
+		
+	}
+
+
 }
