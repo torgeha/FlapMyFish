@@ -34,7 +34,7 @@ public class Player extends Fish {
 	}
 	
 	private void playSound(){
-		GameScreen.soundPool.play(sound, MainActivity.volume, MainActivity.volume, 0, 0, 1);
+		//GameScreen.soundPool.play(sound, MainActivity.volume, MainActivity.volume, 0, 0, 1);
 	}
 	
 	public void draw(Canvas canvas) {
@@ -71,7 +71,7 @@ public class Player extends Fish {
 	}
 	
 	public void move(){
-		this.x = this.getView().getWidth() / 6;
+		//this.x = this.getView().getWidth() / 6;
 
 		if(ySpeed < 0){
 			ySpeed = ySpeed * 2 / 3 + getSpeedTimeDecrease() / 2;

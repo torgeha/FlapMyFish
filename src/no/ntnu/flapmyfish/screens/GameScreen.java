@@ -1,17 +1,11 @@
 package no.ntnu.flapmyfish.screens;
 
-import no.ntnu.flapmyfish.BackgroundLayer;
-import no.ntnu.flapmyfish.MainActivity;
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
 import no.ntnu.flapmyfish.R;
 import sheep.collision.CollisionLayer;
 import sheep.game.State;
 import sheep.game.World;
 import android.graphics.Canvas;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.SoundPool;
-import sheep.audio.Audio;;
 
 public class GameScreen extends State {
 
@@ -20,16 +14,16 @@ public class GameScreen extends State {
 	private CollisionLayer colLayer;
 	
 	//Handles the audio and audio control 
-	public static SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
+	/*public static SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
 	public static MediaPlayer musicPlayer = null;
-	public boolean musicShouldPlay = false;
+	public boolean musicShouldPlay = false;*/
 
 	public GameScreen() {
 		init();
-		initMusicPlayer();
+		//initMusicPlayer();
 	}
 	
-	public void initMusicPlayer(){
+	/*public void initMusicPlayer(){
 		//To avoid unnecessary re-instantiation 
 		if(musicPlayer == null){
 			//musicPlayer = MediaPlayer.create(this, R.raw.NAVN_PA_LYDFIL_HER);  .raw m� opprettes
@@ -38,7 +32,7 @@ public class GameScreen extends State {
 		}
 		// Reset song to position 0
 		musicPlayer.seekTo(0);
-	}
+	}*/
 	
 	public void update(float dt) {
 		world.update(dt);
