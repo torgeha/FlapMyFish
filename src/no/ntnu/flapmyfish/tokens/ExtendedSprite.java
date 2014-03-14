@@ -4,7 +4,7 @@ import no.ntnu.flapmyfish.Constants;
 import sheep.game.Sprite;
 import sheep.graphics.Image;
 
-public class Sprite2 extends Sprite
+public class ExtendedSprite extends Sprite
 {
 //	private float imageWidth;
 //	private float imageHeight;
@@ -12,7 +12,7 @@ public class Sprite2 extends Sprite
 	float yRatio;
 	private float imageRatio;
 	
-	public Sprite2(Image image)
+	public ExtendedSprite(Image image)
 	{
 		super(image);
 		float imageWidth = image.getWidth();
