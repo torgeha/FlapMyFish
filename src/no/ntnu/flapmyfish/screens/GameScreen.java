@@ -1,48 +1,37 @@
 package no.ntnu.flapmyfish.screens;
 
-
-
-
-import no.ntnu.flapmyfish.BackgroundLayer;
+import no.ntnu.flapmyfish.LoopingBackgroundLayer;
 import no.ntnu.flapmyfish.R;
 import sheep.collision.CollisionLayer;
-import sheep.game.Sprite;
 import sheep.game.State;
 import sheep.game.World;
-import sheep.graphics.Image;
 import android.graphics.Canvas;
 
 public class GameScreen extends State {
 
 	private World world;
-	private BackgroundLayer bgLayer;
+	private LoopingBackgroundLayer loopingBgLayer;
 	private CollisionLayer colLayer;
-	
-	
+
 	public GameScreen() {
-		setUpBackGround();
-		setUpCollisionLayer();
+		init();
 	}
-	
-	
+
 	public void update(float dt) {
 		world.update(dt);
 	}
-	
+
+
 	public void draw(Canvas canvas) {
 		world.draw(canvas);
 	}
-	
-	
-	private void setUpBackGround() {
+
+	private void init() {
 		world = new World();
-		bgLayer = new BackgroundLayer();
-		world.addLayer(bgLayer);
-		Sprite bgSprite = new Sprite(new Image(R.drawable.background));
-		bgLayer.addSprite(bgSprite);
-	}
-	
-	private void setUpCollisionLayer() {
+
+		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background1);
+		world.addLayer(loopingBgLayer);
+
 		colLayer = new CollisionLayer();
 		world.addLayer(colLayer);
 	}
