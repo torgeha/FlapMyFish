@@ -5,6 +5,7 @@ package no.ntnu.flapmyfish.screens;
 
 import no.ntnu.flapmyfish.BackgroundLayer;
 import no.ntnu.flapmyfish.R;
+import no.ntnu.flapmyfish.tokens.ExtendedSprite;
 import sheep.game.Layer;
 import sheep.game.Sprite;
 import sheep.game.State;
@@ -37,7 +38,9 @@ public class GameScreen extends State {
 		world = new World();
 		bgLayer = new BackgroundLayer();
 		world.addLayer(bgLayer);
-		Sprite bgSprite = new Sprite(new Image(R.drawable.background));
+		ExtendedSprite bgSprite = new ExtendedSprite(new Image(R.drawable.background));
 		bgLayer.addSprite(bgSprite);
+		bgSprite.setOffset(0, 0);
+		bgSprite.setSize(1, 1);
 	}
 }

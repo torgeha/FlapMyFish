@@ -17,8 +17,8 @@ public class ExtendedSprite extends Sprite
 		super(image);
 		float imageWidth = image.getWidth();
 		float imageHeight = image.getHeight();
-		xRatio = imageWidth/Constants.WINDOW_WIDTH;
-		yRatio = imageHeight/Constants.WINDOW_HEIGHT;
+		xRatio = Constants.WINDOW_WIDTH/imageWidth;
+		yRatio = Constants.WINDOW_HEIGHT/imageHeight;
 		imageRatio = imageWidth/imageHeight;
 	}
 	
