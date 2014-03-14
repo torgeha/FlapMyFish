@@ -22,6 +22,7 @@ public class GameScreen extends State {
 	public GameScreen() {
 		setUpBackGround();
 		setUpCollisionLayer();
+		System.out.println("HELLO FRIENDS");
 	}
 	
 	
