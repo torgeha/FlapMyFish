@@ -5,7 +5,7 @@ package no.ntnu.flapmyfish.screens;
 
 import no.ntnu.flapmyfish.BackgroundLayer;
 import no.ntnu.flapmyfish.R;
-import sheep.game.Layer;
+import sheep.collision.CollisionLayer;
 import sheep.game.Sprite;
 import sheep.game.State;
 import sheep.game.World;
@@ -16,11 +16,12 @@ public class GameScreen extends State {
 
 	private World world;
 	private BackgroundLayer bgLayer;
+	private CollisionLayer colLayer;
 	
 	
 	public GameScreen() {
 		setUpBackGround();
-		
+		setUpCollisionLayer();
 	}
 	
 	
@@ -39,5 +40,10 @@ public class GameScreen extends State {
 		world.addLayer(bgLayer);
 		Sprite bgSprite = new Sprite(new Image(R.drawable.background));
 		bgLayer.addSprite(bgSprite);
+	}
+	
+	private void setUpCollisionLayer() {
+		colLayer = new CollisionLayer();
+		world.addLayer(colLayer);
 	}
 }
