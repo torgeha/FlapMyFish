@@ -31,7 +31,6 @@ public class GameScreen extends State {
 	public GameScreen() {
 		setUpBackGround();
 		setUpCollisionLayer();
-		System.out.println("HELLO FRIENDS");
 		initMusicPlayer();
 	}
 	
@@ -59,6 +58,19 @@ public class GameScreen extends State {
 
 	public void draw(Canvas canvas) {
 		world.draw(canvas);
+	}
+	
+	private void setUpBackGround() {
+		world = new World();
+		bgLayer = new BackgroundLayer();
+		world.addLayer(bgLayer);
+		Sprite bgSprite = new Sprite(new Image(R.drawable.background));
+		bgLayer.addSprite(bgSprite);
+	}
+	
+	private void setUpCollisionLayer() {
+		colLayer = new CollisionLayer();
+		world.addLayer(colLayer);
 	}
 
 	private void init() {
