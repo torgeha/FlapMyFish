@@ -22,6 +22,10 @@ public class ExtendedSprite extends Sprite
 		imageRatio = imageWidth/imageHeight;
 	}
 	
+	public ExtendedSprite() {
+		super();
+	}
+	
 	/**
 	 * Sets the size of the sprite relative to the screen size.
 	 * 

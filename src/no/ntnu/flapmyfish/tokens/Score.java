@@ -1,11 +1,14 @@
 package no.ntnu.flapmyfish.tokens;
 
+import no.ntnu.flapmyfish.Constants;
+
 public class Score extends Token {
 
 	private int points;
 	private static Score score = null;
 	
 	public Score() {
+		super();
 	}
 	
 	public static Score getInstance() {
@@ -24,7 +27,7 @@ public class Score extends Token {
 	}
 	
 	public void addTravelPoints() {
-		addPoints(Cosntants.TRAVEL_POINTS);
+		addPoints(Constants.TRAVEL_POINTS);
 	}
 	
 	public int getPoints() {
