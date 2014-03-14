@@ -8,5 +8,8 @@ public class Constants {
 	//Change relative to screen size
 	public static final float PLAYER_STARTING_POSITION_X = 30;
 	public static final float PLAYER_STARTING_POSITION_Y = 50;
-	
+
+	public static int WINDOW_WIDTH;
+	public static int WINDOW_HEIGHT;
+
 }
