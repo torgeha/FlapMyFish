@@ -1,7 +1,5 @@
 package no.ntnu.flapmyfish.screens;
 
-
-
 import no.ntnu.flapmyfish.BackgroundLayer;
 import no.ntnu.flapmyfish.MainActivity;
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
@@ -26,51 +24,28 @@ public class GameScreen extends State {
 	public static MediaPlayer musicPlayer = null;
 	public boolean musicShouldPlay = false;
 
-	
-	
 	public GameScreen() {
-		setUpBackGround();
-		setUpCollisionLayer();
+		init();
 		initMusicPlayer();
 	}
 	
-	
 	public void initMusicPlayer(){
-		
 		//To avoid unnecessary re-instantiation 
 		if(musicPlayer == null){
 			//musicPlayer = MediaPlayer.create(this, R.raw.NAVN_PA_LYDFIL_HER);  .raw m� opprettes
 			musicPlayer.setLooping(true);
 			musicPlayer.setVolume(MainActivity.volume, MainActivity.volume);
 		}
-		
 		// Reset song to position 0
-		musicPlayer.seekTo(0);	
-
-	public GameScreen() {
-		init();
+		musicPlayer.seekTo(0);
 	}
-
+	
 	public void update(float dt) {
 		world.update(dt);
 	}
 
-
 	public void draw(Canvas canvas) {
 		world.draw(canvas);
-	}
-	
-	private void setUpBackGround() {
-		world = new World();
-		bgLayer = new BackgroundLayer();
-		world.addLayer(bgLayer);
-		Sprite bgSprite = new Sprite(new Image(R.drawable.background));
-		bgLayer.addSprite(bgSprite);
-	}
-	
-	private void setUpCollisionLayer() {
-		colLayer = new CollisionLayer();
-		world.addLayer(colLayer);
 	}
 
 	private void init() {
@@ -83,10 +58,7 @@ public class GameScreen extends State {
 		world.addLayer(colLayer);
 	}
 
-
 	public World getWorld() {
 		return world;
 	}
-	
-	
 }
