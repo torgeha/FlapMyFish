@@ -5,7 +5,6 @@ import sheep.game.Game;
 import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.Display;
 
 public class MainActivity extends Activity {

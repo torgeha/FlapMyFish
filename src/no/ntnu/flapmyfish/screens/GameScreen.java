@@ -2,6 +2,7 @@ package no.ntnu.flapmyfish.screens;
 
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
 import no.ntnu.flapmyfish.R;
+import no.ntnu.flapmyfish.tokens.Player2;
 import sheep.collision.CollisionLayer;
 import sheep.game.State;
 import sheep.game.World;
@@ -50,6 +51,10 @@ public class GameScreen extends State {
 
 		colLayer = new CollisionLayer();
 		world.addLayer(colLayer);
+		
+		Player2 player = new Player2(R.drawable.hero_fish_v2);
+		addTouchListener(player);
+		colLayer.addSprite(player);
 	}
 
 	public World getWorld() {
