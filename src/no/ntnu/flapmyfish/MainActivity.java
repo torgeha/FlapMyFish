@@ -48,6 +48,7 @@ public class MainActivity extends Activity {
 	}
 	
 	protected void onPause() {
+		super.onPause();
 		//Save highscore if game is interrupted
 		SharedPreferences prefs = this.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
 		Editor editor = prefs.edit();

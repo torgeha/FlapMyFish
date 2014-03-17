@@ -19,6 +19,8 @@ public class CollisionController implements CollisionListener {
 	public void collided(Sprite a, Sprite b) {
 		Player player = (Player) a;
 		if (b instanceof HorizontalBorder) {
+			HorizontalBorder hb = (HorizontalBorder) b;
+			if (hb.isTopBorder()) a.setPosition(a.getPosition().getX(), a.getPosition().getY()+player.getLastDelta()*Constants.PLAYER_FLAP_SPEED);
 			a.setSpeed(0, 0);
 		}
 		else if (b instanceof Food) {
