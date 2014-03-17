@@ -71,7 +71,7 @@ public class Player extends Fish {
 	}
 	
 	public void move(){
-		this.x = this.getView().getWidth() / 6;
+//		this.x = this.getView().getWidth() / 6;
 
 		if(ySpeed < 0){
 			ySpeed = ySpeed * 2 / 3 + getSpeedTimeDecrease() / 2;

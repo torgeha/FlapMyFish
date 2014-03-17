@@ -49,6 +49,15 @@ public class ExtendedSprite extends Sprite
 	}
 	
 	/**
+	 * Returns the width of the sprite relative to the screen width.
+	 * @return
+	 */
+	public float getWidth()
+	{
+		return getScale().getX()/xRatio;
+	}
+	
+	/**
 	 * Returns the height of the sprite relative to the screen height.
 	 * @return
 	 */
