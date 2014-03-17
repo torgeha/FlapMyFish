@@ -9,12 +9,12 @@ import sheep.game.SpriteContainer;
 import sheep.math.BoundingBox;
 import android.graphics.Canvas;
 
-public class BackgroundLayer extends Layer implements SpriteContainer{
+public class ExtendedLayer extends Layer implements SpriteContainer{
 
 	private ArrayList<Sprite> sprites;
 	private LinkedList<Sprite> kill;
 	
-	public BackgroundLayer() {
+	public ExtendedLayer() {
 		sprites = new ArrayList<Sprite>();
 		kill = new LinkedList<Sprite>();
 	}
