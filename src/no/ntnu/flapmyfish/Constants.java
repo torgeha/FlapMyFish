@@ -5,6 +5,8 @@ import android.graphics.Color;
 public class Constants {
 
 	//Points for scoring
+	//Highscore is set from sharedPreferences on startup and stored on pause
+	public static int HIGHSCORE;
 	public static final int FOOD_POINTS = 5;
 	public static final int TRAVEL_POINTS = 1;
 	public static final int SCORE_COLOR = Color.WHITE;
