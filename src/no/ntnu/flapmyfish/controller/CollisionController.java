@@ -1,5 +1,6 @@
 package no.ntnu.flapmyfish.controller;
 
+import no.ntnu.flapmyfish.Constants;
 import no.ntnu.flapmyfish.tokens.Enemy;
 import no.ntnu.flapmyfish.tokens.Food;
 import no.ntnu.flapmyfish.tokens.HorizontalBorder;
@@ -25,7 +26,12 @@ public class CollisionController implements CollisionListener {
 			Score.getInstance().addFoodPoints();
 		}
 		else if (b instanceof Enemy) {
-			//TODO: kill player, game over.
+			//TODO: kill player, save score if new highscore, game over.
+			
+			//save score if new highscore
+			if (Constants.HIGHSCORE < Score.getInstance().getPoints()) {
+				Constants.HIGHSCORE = Score.getInstance().getPoints();
+			}
 		}
 		
 	}
