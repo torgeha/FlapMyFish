@@ -24,12 +24,12 @@ public class Level {
 	
 	public void update(float dt) {
 		timePassed+=dt;
-		if (timePassed >=5000) {
+		if (timePassed >=5) {
 			for (ExtendedSprite sprite : snippets[nextSnippet].getSprites()) {
 				collisionLayer.addSprite(sprite);
 			}
 			nextSnippet = (nextSnippet+1)%Constants.LEVEL_LENGTH;
-			timePassed -= 5000;
+			timePassed -= 5;
 		}
 	}
 }
