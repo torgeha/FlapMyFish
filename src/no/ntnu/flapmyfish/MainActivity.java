@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
         
         Constants.WINDOW_WIDTH  = width;
         Constants.WINDOW_HEIGHT = height;
+        Constants.SNIPPET_WIDTH = Constants.WINDOW_WIDTH/3;
         
         //get highscore from file, if it exists
         SharedPreferences prefs = this.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);

@@ -29,5 +29,13 @@ public class Constants {
 	
 	//Default volume for sound
 	public static final float DEFAULT_VOLUME = 0.4f;
+	
+	//Level numbers
+	public static final int LEVEL_SNIPPET_POOL_SIZE = 10;
+	public static final int LEVEL_LENGTH = 10;
+	public static final int MAX_ENEMY_SPEED = 200;
+	public static final int NUMBER_OF_BLOCKS_X_DIR = 6;
+	public static final int NUMBER_OF_BLOCKS_Y_DIR = 6;
+	public static int SNIPPET_WIDTH;
 
 }

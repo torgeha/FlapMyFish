@@ -1,9 +1,11 @@
 package no.ntnu.flapmyfish.screens;
 
-import no.ntnu.flapmyfish.ExtendedLayer;
 import no.ntnu.flapmyfish.Constants;
+import no.ntnu.flapmyfish.ExtendedLayer;
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
 import no.ntnu.flapmyfish.R;
+import no.ntnu.flapmyfish.level.Level;
+import no.ntnu.flapmyfish.level.LevelFactory;
 import no.ntnu.flapmyfish.tokens.HorizontalBorder;
 import no.ntnu.flapmyfish.tokens.Player;
 import no.ntnu.flapmyfish.tokens.Score;
@@ -18,6 +20,7 @@ public class GameScreen extends State {
 	private LoopingBackgroundLayer loopingBgLayer;
 	private CollisionLayer colLayer;
 	private ExtendedLayer foregroundLayer;
+	private Level level;
 	
 	
 	//Handles the audio and audio control 
@@ -31,6 +34,7 @@ public class GameScreen extends State {
 
 	public void update(float dt) {
 		world.update(dt);
+		level.update(dt);
 	}
 
 	public void draw(Canvas canvas) {
@@ -59,6 +63,8 @@ public class GameScreen extends State {
 		HorizontalBorder topBorder = new HorizontalBorder(0, -100);
 		colLayer.addSprite(bottomBorder);
 		colLayer.addSprite(topBorder);
+		
+		level = new Level(LevelFactory.generateLevel(), colLayer);
 	}
 
 	public World getWorld() {
