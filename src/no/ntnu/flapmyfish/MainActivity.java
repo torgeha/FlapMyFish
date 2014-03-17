@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
         
         Constants.WINDOW_WIDTH  = width;
         Constants.WINDOW_HEIGHT = height;
+        Constants.SNIPPET_WIDTH = Constants.WINDOW_WIDTH/3;
 		
 //		game.pushState(new MainMenuScreen());
 		game.pushState(new GameScreen());
