@@ -2,7 +2,7 @@ package no.ntnu.flapmyfish.level;
 
 import no.ntnu.flapmyfish.Constants;
 import sheep.collision.CollisionLayer;
-import sheep.game.Sprite;
+import no.ntnu.flapmyfish.tokens.ExtendedSprite;
 
 public class Level {
 
@@ -25,7 +25,7 @@ public class Level {
 	public void update(float dt) {
 		timePassed+=dt;
 		if (timePassed >=5000) {
-			for (Sprite sprite : snippets[nextSnippet].getSprites()) {
+			for (ExtendedSprite sprite : snippets[nextSnippet].getSprites()) {
 				collisionLayer.addSprite(sprite);
 			}
 			nextSnippet = (nextSnippet+1)%Constants.LEVEL_LENGTH;
