@@ -1,8 +1,10 @@
 package no.ntnu.flapmyfish.screens;
 
 import no.ntnu.flapmyfish.ExtendedLayer;
+import no.ntnu.flapmyfish.Constants;
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
 import no.ntnu.flapmyfish.R;
+import no.ntnu.flapmyfish.tokens.HorizontalBorder;
 import no.ntnu.flapmyfish.tokens.Player;
 import no.ntnu.flapmyfish.tokens.Score;
 import sheep.collision.CollisionLayer;
@@ -25,20 +27,8 @@ public class GameScreen extends State {
 
 	public GameScreen() {
 		init();
-		//initMusicPlayer();
 	}
-	
-	/*public void initMusicPlayer(){
-		//To avoid unnecessary re-instantiation 
-		if(musicPlayer == null){
-			//musicPlayer = MediaPlayer.create(this, R.raw.NAVN_PA_LYDFIL_HER);  .raw m� opprettes
-			musicPlayer.setLooping(true);
-			musicPlayer.setVolume(MainActivity.volume, MainActivity.volume);
-		}
-		// Reset song to position 0
-		musicPlayer.seekTo(0);
-	}*/
-	
+
 	public void update(float dt) {
 		world.update(dt);
 	}
@@ -65,6 +55,10 @@ public class GameScreen extends State {
 		
 		Score score = Score.getInstance();
 		foregroundLayer.addSprite(score);
+		HorizontalBorder bottomBorder = new HorizontalBorder(Constants.WINDOW_HEIGHT, 100);
+		HorizontalBorder topBorder = new HorizontalBorder(0, -100);
+		colLayer.addSprite(bottomBorder);
+		colLayer.addSprite(topBorder);
 	}
 
 	public World getWorld() {

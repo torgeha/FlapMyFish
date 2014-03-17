@@ -1,6 +1,7 @@
 package no.ntnu.flapmyfish.tokens;
 
 import no.ntnu.flapmyfish.Constants;
+import no.ntnu.flapmyfish.controller.CollisionController;
 import sheep.input.TouchListener;
 import android.view.MotionEvent;
 
@@ -8,7 +9,8 @@ public class Player extends Fish implements TouchListener {
 	
 	public Player(int resId) {
 		super(resId);
-		setPosition((Constants.WINDOW_WIDTH)/2, (Constants.WINDOW_HEIGHT)/2); //Subtract half of this sprite's width and height for exact center.
+		setPosition((Constants.WINDOW_WIDTH)/2, (Constants.WINDOW_HEIGHT)/2);
+		addCollisionListener(new CollisionController());
 		sink();
 	}
 	
