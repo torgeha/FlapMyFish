@@ -6,9 +6,9 @@ import sheep.game.Sprite;
 import sheep.graphics.Image;
 
 /**
- * This class extends {@link BackgroundLayer} and simulates an infinite background loop which moves leftwards. 
+ * This class extends {@link ExtendedLayer} and simulates an infinite background loop which moves leftwards. 
  */
-public class LoopingBackgroundLayer extends BackgroundLayer {
+public class LoopingBackgroundLayer extends ExtendedLayer {
 	
 	private static final int NO_OF_SPRITES = 2;
 	private LinkedList<Sprite> backgroundChain;
