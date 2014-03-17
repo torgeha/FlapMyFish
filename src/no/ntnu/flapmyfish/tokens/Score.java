@@ -39,7 +39,7 @@ public class Score extends Token {
 	}
 	
 	public void draw(Canvas canvas) {
-		canvas.drawText(points + "", getPosition().getX(), getPosition().getY(), scorePaint);
+		canvas.drawText("Score:" + points + " BEST:" + Constants.HIGHSCORE , getPosition().getX(), getPosition().getY(), scorePaint);
 	}
 	
 	public void update(float dt) {

@@ -10,21 +10,25 @@ import android.graphics.Rect;
 
 public class HorizontalBorder extends Token {
 	
-	Paint p;
-	Rect r;
+	boolean topBorder;
 	
 	public HorizontalBorder(int y, int height) {
 		super();
-		p = new Paint();
+		Paint p = new Paint();
 		p.setColor(Color.WHITE);
-		r = new Rect(0, y, Constants.WINDOW_WIDTH, y+height);
+		Rect r = new Rect(0, y, Constants.WINDOW_WIDTH, y+height);
 		setShape(new Polygon(new BoundingBox(r).getPoints()));
+		topBorder = height < 0;
 	}
 	
-	@Override
+	public boolean isTopBorder(){
+		return topBorder;
+	}
+	
+	/*@Override
 	public void draw(Canvas canvas) {
 		canvas.drawRect(r, p);
 		super.draw(canvas);
-	}
+	}*/
 
 }

@@ -3,6 +3,9 @@ package no.ntnu.flapmyfish;
 import no.ntnu.flapmyfish.screens.GameScreen;
 import sheep.game.Game;
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
@@ -33,11 +36,25 @@ public class MainActivity extends Activity {
         Constants.WINDOW_WIDTH  = width;
         Constants.WINDOW_HEIGHT = height;
         Constants.SNIPPET_WIDTH = Constants.WINDOW_WIDTH/3;
+        
+        //get highscore from file, if it exists
+        SharedPreferences prefs = this.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        int score = prefs.getInt("myHighscore", 0);
+        Constants.HIGHSCORE = score;
 		
 //		game.pushState(new MainMenuScreen());
 		game.pushState(new GameScreen());
 		setContentView(game);
 		
+	}
+	
+	protected void onPause() {
+		super.onPause();
+		//Save highscore if game is interrupted
+		SharedPreferences prefs = this.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+		Editor editor = prefs.edit();
+		editor.putInt("myHighscore", Constants.HIGHSCORE);
+		editor.commit();
 	}
 
 	
