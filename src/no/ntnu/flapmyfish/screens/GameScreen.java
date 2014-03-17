@@ -1,7 +1,9 @@
 package no.ntnu.flapmyfish.screens;
 
+import no.ntnu.flapmyfish.Constants;
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
 import no.ntnu.flapmyfish.R;
+import no.ntnu.flapmyfish.tokens.HorizontalBorder;
 import no.ntnu.flapmyfish.tokens.Player;
 import sheep.collision.CollisionLayer;
 import sheep.game.State;
@@ -13,28 +15,11 @@ public class GameScreen extends State {
 	private World world;
 	private LoopingBackgroundLayer loopingBgLayer;
 	private CollisionLayer colLayer;
-	
-	//Handles the audio and audio control 
-	/*public static SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
-	public static MediaPlayer musicPlayer = null;
-	public boolean musicShouldPlay = false;*/
 
 	public GameScreen() {
 		init();
-		//initMusicPlayer();
 	}
-	
-	/*public void initMusicPlayer(){
-		//To avoid unnecessary re-instantiation 
-		if(musicPlayer == null){
-			//musicPlayer = MediaPlayer.create(this, R.raw.NAVN_PA_LYDFIL_HER);  .raw m� opprettes
-			musicPlayer.setLooping(true);
-			musicPlayer.setVolume(MainActivity.volume, MainActivity.volume);
-		}
-		// Reset song to position 0
-		musicPlayer.seekTo(0);
-	}*/
-	
+
 	public void update(float dt) {
 		world.update(dt);
 	}
@@ -55,6 +40,11 @@ public class GameScreen extends State {
 		Player player = new Player(R.drawable.hero_fish_v2);
 		addTouchListener(player);
 		colLayer.addSprite(player);
+		
+		HorizontalBorder bottomBorder = new HorizontalBorder(Constants.WINDOW_HEIGHT, 100);
+		HorizontalBorder topBorder = new HorizontalBorder(0, -100);
+		colLayer.addSprite(bottomBorder);
+		colLayer.addSprite(topBorder);
 	}
 
 	public World getWorld() {
