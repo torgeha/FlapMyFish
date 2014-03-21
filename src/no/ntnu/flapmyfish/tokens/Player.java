@@ -42,10 +42,6 @@ public class Player extends Fish implements TouchListener {
 		return lastDelta;
 	}
 	
-	public boolean isTouchDown() {
-		return touchDown;
-	}
-	
 	private void sink() {
 		setSpeed(0, Constants.PLAYER_SINK_SPEED);
 	}
