@@ -36,7 +36,8 @@ public class ExtendedSprite extends Sprite
 	{
 		setScale(width*xRatio, height*yRatio);
 		//TODO:
-//		setShape(width, height);s
+//		setShape(width, height);
+//		setOffset(x, y);
 	}
 	
 	/**
@@ -56,27 +57,46 @@ public class ExtendedSprite extends Sprite
 	 */
 	public void setSizeByHeight(float height)
 	{
-		float width = height*imageRatio*yRatio;
+		float width = height*yRatio;
 		setScale(width, height*yRatio);
 		//TODO:
 		//setShape(width, height);
+		//setOffset(x, y);
 	}
 	
 	/**
 	 * Returns the width of the sprite relative to the screen width.
 	 * @return
 	 */
-	public float getWidth()
+	public float getRelativeWidth()
 	{
 		return getScale().getX()/xRatio;
+	}
+	
+	/**
+	 * Returns the width of the sprite in pixels.
+	 * @return
+	 */
+	public float getWidth()
+	{
+		return imageWidth*getScale().getX();
 	}
 	
 	/**
 	 * Returns the height of the sprite relative to the screen height.
 	 * @return
 	 */
-	public float getHeight()
+	public float getRelativeHeight()
 	{
 		return getScale().getY()/yRatio;
+	}
+	
+	/**
+	 * Returns the height of the sprite in pixels.
+	 * @return
+	 */
+	public float getHeight()
+	{
+		return imageHeight*getScale().getY();
 	}
 }
