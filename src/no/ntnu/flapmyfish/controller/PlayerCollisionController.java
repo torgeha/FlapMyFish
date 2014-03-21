@@ -18,13 +18,13 @@ public class PlayerCollisionController implements CollisionListener {
 	@Override
 	public void collided(Sprite a, Sprite b) {
 		Player player = (Player) a;
-		if (b instanceof HorizontalBorder) {
+		/*if (b instanceof HorizontalBorder) {
 			HorizontalBorder hb = (HorizontalBorder) b;
 			if (hb.isTopBorder()) a.setPosition(a.getPosition().getX(), a.getPosition().getY()+player.getLastDelta()*Constants.PLAYER_FLAP_SPEED);
 			else a.setPosition(a.getPosition().getX(), a.getPosition().getY()-player.getLastDelta()*Constants.PLAYER_FLAP_SPEED);
 			a.setSpeed(0, 0);
-		}
-		else if (b instanceof Food) {
+		}*/
+		if (b instanceof Food) {
 			b.die();
 			Score.getInstance().addFoodPoints();
 		}
