@@ -1,7 +1,6 @@
 package no.ntnu.flapmyfish.tokens;
 
-import sheep.collision.CollisionListener;
-import sheep.game.Sprite;
+import no.ntnu.flapmyfish.Constants;
 import sheep.graphics.Image;
 
 public class Token extends ExtendedSprite {
@@ -12,6 +11,13 @@ public class Token extends ExtendedSprite {
 	
 	public Token() {
 		super();
+	}
+	
+	public void update(float dt) {
+		super.update(dt);
+		if (getPosition().getX()+Constants.WINDOW_WIDTH/3.0f/*+(getWidth()/2.0f)*/<0) {
+			die();
+		}
 	}
 
 }
