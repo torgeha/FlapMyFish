@@ -2,11 +2,6 @@ package no.ntnu.flapmyfish.tokens;
 
 import no.ntnu.flapmyfish.Constants;
 import sheep.collision.Polygon;
-import sheep.math.BoundingBox;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 
 public class HorizontalBorder extends Token {
 	
@@ -14,10 +9,11 @@ public class HorizontalBorder extends Token {
 	
 	public HorizontalBorder(int y, int height) {
 		super();
-		Paint p = new Paint();
-		p.setColor(Color.WHITE);
-		Rect r = new Rect(0, y, Constants.WINDOW_WIDTH, y+height);
-		setShape(new Polygon(new BoundingBox(r).getPoints()));
+		/*Paint p = new Paint();
+		p.setColor(Color.WHITE);*/
+		/*Rect r = new Rect(0, y, Constants.WINDOW_WIDTH, y+height);
+		setShape(new Polygon(new BoundingBox(r).getPoints()));*/
+		setShape(new Polygon(new float[]{0, y, 0, y+height, Constants.WINDOW_WIDTH, y, Constants.WINDOW_WIDTH, y+height}));
 		topBorder = height < 0;
 	}
 	
