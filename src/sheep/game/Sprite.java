@@ -139,14 +139,32 @@ public class Sprite {
 			view.draw(canvas, matrix);
 	}
 	
+//	/**
+//	 * Updates the current transformation matrix.
+//	 */
+//	private void updateMatrix() {
+//		matrix.reset();
+//		matrix.preTranslate(position.getX() - offset.getX(), position.getY() - offset.getY());
+//		matrix.preRotate(orientation);
+//		matrix.preScale(scale.getX(), scale.getY());
+//	}
+	
+	
+	//XXX: Possible bug fixed.
+	//Changed the code here, to get the flipping of sprites right.
+	//Now the sprite is flipped around the offset point.
+	//(Can also fix the flipping-bug by inverting the offset in the relevant sprite.
+	//That is, e.g. to write "setOffset(-getOffset().getX(), getOffset().getY());" when
+	//"setScale(-getScale().getX(), getScale().getY());" is used.)
 	/**
 	 * Updates the current transformation matrix.
 	 */
 	private void updateMatrix() {
 		matrix.reset();
-		matrix.preTranslate(position.getX() - offset.getX(), position.getY() - offset.getY());
+		matrix.preTranslate(position.getX(), position.getY());
 		matrix.preRotate(orientation);
 		matrix.preScale(scale.getX(), scale.getY());
+		matrix.preTranslate(-offset.getX(),-offset.getY());
 	}
 	
 	/**
