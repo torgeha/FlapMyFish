@@ -2,14 +2,15 @@ package no.ntnu.flapmyfish;
 
 import no.ntnu.flapmyfish.screens.MainMenuScreen;
 import sheep.game.Game;
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.Display;
 
-public class MainActivity extends Activity {
+import com.google.example.games.basegameutils.BaseGameActivity;
+
+public class MainActivity extends BaseGameActivity {
 
 	private Game game;
 	
@@ -55,6 +56,18 @@ public class MainActivity extends Activity {
 		Editor editor = prefs.edit();
 		editor.putInt("myHighscore", Constants.HIGHSCORE);
 		editor.commit();
-	}	
+	}
+
+	@Override
+	public void onSignInFailed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSignInSucceeded() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
