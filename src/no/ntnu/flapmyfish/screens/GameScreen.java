@@ -32,11 +32,13 @@ public class GameScreen extends State {
 		init();
 	}
 
+	@Override
 	public void update(float dt) {
 		world.update(dt);
 		level.update(dt);
 	}
 
+	@Override
 	public void draw(Canvas canvas) {
 		world.draw(canvas);
 	}
@@ -44,7 +46,7 @@ public class GameScreen extends State {
 	private void init() {
 		world = new World();
 
-		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background1);
+		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background_looper);
 		world.addLayer(loopingBgLayer);
 
 		colLayer = new CollisionLayer();

@@ -13,6 +13,7 @@ public class Token extends ExtendedSprite {
 		super();
 	}
 	
+	@Override
 	public void update(float dt) {
 		super.update(dt);
 		if (getPosition().getX()+Constants.WINDOW_WIDTH/3.0f/*+(getWidth()/2.0f)*/<0) {

@@ -38,10 +38,12 @@ public class Score extends Token {
 		scorePaint.setTextSize(Constants.WINDOW_HEIGHT / 22);
 	}
 	
+	@Override
 	public void draw(Canvas canvas) {
 		canvas.drawText("Score:" + points + " BEST:" + Constants.HIGHSCORE , getPosition().getX(), getPosition().getY(), scorePaint);
 	}
 	
+	@Override
 	public void update(float dt) {
 		counter += dt;
 		if ((counter / 1.0f) > Constants.SCORE_FREQUENCY) {

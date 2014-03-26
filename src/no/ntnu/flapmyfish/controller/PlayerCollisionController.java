@@ -3,7 +3,6 @@ package no.ntnu.flapmyfish.controller;
 import no.ntnu.flapmyfish.Constants;
 import no.ntnu.flapmyfish.tokens.Enemy;
 import no.ntnu.flapmyfish.tokens.Food;
-import no.ntnu.flapmyfish.tokens.HorizontalBorder;
 import no.ntnu.flapmyfish.tokens.Player;
 import no.ntnu.flapmyfish.tokens.Score;
 import sheep.collision.CollisionListener;
