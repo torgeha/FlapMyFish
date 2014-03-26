@@ -87,6 +87,10 @@ public class TextButton extends Widget {
 		this(new Vector2(x, y), label, paint);
 	}
 	
+	public TextButton(float x, float y, String label, Paint paint) {
+		this(new Vector2(x, y), label, new Paint[] {paint, paint});
+	}
+	
 	/**
 	 * Creates a new TextButton at the current position with the 
 	 * specified label.
@@ -126,12 +130,20 @@ public class TextButton extends Widget {
 		canvas.drawText(label, 0, label.length(), position.getX(), position.getY(), paint[state]);
 	}
 	
+	public void draw(Canvas canvas, float x, float y) {
+		canvas.drawText(label, 0, label.length(), x, y, paint[state]);
+	}
+	
 	/**
 	 * Gets the BoundingBox for this TextButton.
 	 * @return
 	 */
 	public BoundingBox getBoundingBox() {
 		return box;	
+	}
+	
+	public void setBoundingBox(BoundingBox box) {
+		this.box = box;
 	}
 	
 	/**
@@ -189,6 +201,19 @@ public class TextButton extends Widget {
 		}
 		
 		return false;
+	}
+	
+	public Vector2 getPosition(){
+		return position;
+	}
+	
+	/**
+	 * Returns an {@code int} representing the state of this button.
+	 * @return {@value #STATE_IDLE} if idle and {@value #STATE_DOWN} if button is pressed down. 
+	 * @see {@link #STATE_IDLE}, {@link #STATE_DOWN}
+	 */
+	public int getState(){
+		return state;
 	}
 	
 }

@@ -1,20 +1,17 @@
 package no.ntnu.flapmyfish;
 
-import no.ntnu.flapmyfish.screens.GameScreen;
+import no.ntnu.flapmyfish.screens.MainMenuScreen;
 import sheep.game.Game;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 
 public class MainActivity extends Activity {
 
 	private Game game;
-	private Point size;
-	
 	
 	//Volume for sound
 	public static float volume = Constants.DEFAULT_VOLUME;
@@ -37,13 +34,18 @@ public class MainActivity extends Activity {
         Constants.WINDOW_HEIGHT = height;
         Constants.SNIPPET_WIDTH = Constants.WINDOW_WIDTH/3;
         
+        Constants.MAX_ENEMY_SPEED = (int)(0.2f*Constants.WINDOW_WIDTH);
+        
+        //Get the screen's density scale
+        Constants.SCALE = getResources().getDisplayMetrics().density;
+        
         //get highscore from file, if it exists
         SharedPreferences prefs = this.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
         int score = prefs.getInt("myHighscore", 0);
         Constants.HIGHSCORE = score;
 		
-//		game.pushState(new MainMenuScreen());
-		game.pushState(new GameScreen());
+		game.pushState(new MainMenuScreen());
+//		game.pushState(new GameScreen());
 		setContentView(game);
 		
 	}
@@ -55,8 +57,6 @@ public class MainActivity extends Activity {
 		Editor editor = prefs.edit();
 		editor.putInt("myHighscore", Constants.HIGHSCORE);
 		editor.commit();
-	}
-
-	
+	}	
 
 }
