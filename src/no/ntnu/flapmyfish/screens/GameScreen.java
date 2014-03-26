@@ -1,12 +1,11 @@
 package no.ntnu.flapmyfish.screens;
 
-import no.ntnu.flapmyfish.Constants;
 import no.ntnu.flapmyfish.ExtendedLayer;
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
 import no.ntnu.flapmyfish.R;
 import no.ntnu.flapmyfish.level.Level;
 import no.ntnu.flapmyfish.level.LevelFactory;
-import no.ntnu.flapmyfish.tokens.HorizontalBorder;
+import no.ntnu.flapmyfish.tokens.CountDownTimer;
 import no.ntnu.flapmyfish.tokens.Player;
 import no.ntnu.flapmyfish.tokens.Score;
 import sheep.collision.CollisionLayer;
@@ -21,26 +20,29 @@ public class GameScreen extends State {
 	private CollisionLayer colLayer;
 	private ExtendedLayer foregroundLayer;
 	private Level level;
-	
-	
-	//Handles the audio and audio control 
-	/*public static SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
-	public static MediaPlayer musicPlayer = null;
-	public boolean musicShouldPlay = false;*/
+	private CountDownTimer countDownTimer;
 
 	public GameScreen() {
 		init();
+		world.update(0);
+		level.update(0);
 	}
 
 	public void update(float dt) {
-		world.update(dt);
-		level.update(dt);
+		if (countDownTimer.isFinished()){
+			world.update(dt);
+			level.update(dt);
+			if (countDownTimer.hasAciveMessage()) countDownTimer.update(dt);
+		} else {
+			countDownTimer.update(dt);
+		}
 	}
 
 	public void draw(Canvas canvas) {
 		world.draw(canvas);
+		if (!countDownTimer.isFinished() || countDownTimer.hasAciveMessage()) countDownTimer.draw(canvas);
 	}
-
+	
 	private void init() {
 		world = new World();
 
@@ -59,10 +61,8 @@ public class GameScreen extends State {
 		
 		Score score = Score.getInstance();
 		foregroundLayer.addSprite(score);
-		HorizontalBorder bottomBorder = new HorizontalBorder(Constants.WINDOW_HEIGHT, 100);
-		HorizontalBorder topBorder = new HorizontalBorder(0, -100);
-		colLayer.addSprite(bottomBorder);
-		colLayer.addSprite(topBorder);
+		
+		countDownTimer = new CountDownTimer(3, "GO!");
 		
 		level = new Level(LevelFactory.generateLevel(), colLayer);
 	}
