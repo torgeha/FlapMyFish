@@ -1,6 +1,6 @@
 package no.ntnu.flapmyfish;
 
-import no.ntnu.flapmyfish.screens.GameScreen;
+import no.ntnu.flapmyfish.screens.MainMenuScreen;
 import sheep.game.Game;
 import android.app.Activity;
 import android.content.Context;
@@ -42,10 +42,12 @@ public class MainActivity extends Activity {
         int score = prefs.getInt("myHighscore", 0);
         Constants.HIGHSCORE = score;
 		
-//		game.pushState(new MainMenuScreen());
-		game.pushState(new GameScreen());
+		game.pushState(new MainMenuScreen());
+//		game.pushState(new GameScreen());
 		setContentView(game);
 		
+		//Get the screen's density scale
+		Constants.SCALE = getResources().getDisplayMetrics().density;
 	}
 	
 	protected void onPause() {

@@ -1,6 +1,8 @@
 package no.ntnu.flapmyfish;
 
+import sheep.graphics.Font;
 import android.graphics.Color;
+import android.graphics.Typeface;
 
 public class Constants {
 
@@ -37,5 +39,11 @@ public class Constants {
 	public static final int NUMBER_OF_BLOCKS_X_DIR = 6;
 	public static final int NUMBER_OF_BLOCKS_Y_DIR = 6;
 	public static int SNIPPET_WIDTH;
+	
+	//Fonts
+	//public static final Font FONT_WHITE_SANS_BOLD_50 = new Font(255, 255, 255, 50f, Typeface.SANS_SERIF, Typeface.BOLD);
+	
+	//Factors to support different screen sizes/densities
+	public static float SCALE;
 
 }
