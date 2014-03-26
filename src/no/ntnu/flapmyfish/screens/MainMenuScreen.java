@@ -7,17 +7,16 @@ import no.ntnu.flapmyfish.LoopingBackgroundLayer;
 import no.ntnu.flapmyfish.R;
 import no.ntnu.flapmyfish.gui.ImageButton;
 import sheep.game.State;
-import sheep.game.World;
 import sheep.graphics.Image;
 import sheep.gui.Widget;
 import sheep.gui.WidgetAction;
 import sheep.gui.WidgetListener;
+import sheep.math.BoundingBox;
 import android.graphics.Canvas;
 
 public class MainMenuScreen extends State implements WidgetListener {
 
 	private LoopingBackgroundLayer loopingBgLayer;
-	private World world;
 	private ArrayList<ImageButton> btns;
 
 	public MainMenuScreen(){
@@ -25,21 +24,18 @@ public class MainMenuScreen extends State implements WidgetListener {
 	}
 
 	public void draw(Canvas canvas){
-		world.draw(canvas);
+		loopingBgLayer.draw(canvas, new BoundingBox(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
 		for (ImageButton btn : btns){
 			btn.draw(canvas);
 		}
 	}
 
 	public void update(float dt){
-		world.update(dt);
+		loopingBgLayer.update(dt);
 	}
 
 	public void init(){
-		world = new World();
-
 		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background1);
-		world.addLayer(loopingBgLayer);
 
 		generateButtons(new String[] {"Play", "Instructions", "Settings"});
 	}
