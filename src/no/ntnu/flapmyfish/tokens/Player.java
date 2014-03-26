@@ -10,16 +10,20 @@ public class Player extends Fish implements TouchListener {
 	private float lastDelta;
 	private boolean touchDown;
 	
-	public Player(int resId) {
-		super(resId);
-		setPosition((Constants.WINDOW_WIDTH)/2, (Constants.WINDOW_HEIGHT)/2);
-		addCollisionListener(new PlayerCollisionController());
-		sink();
+//	public Player(int resId) {
+//		super(resId);
+//		initPlayer();
+//	}
+	
+	public Player(int[] keyFramesResIds, float frameDuration, int currentFrame) {
+		super(keyFramesResIds, frameDuration, currentFrame);
+		initPlayer();
 	}
 	
 	@Override
 	public void update(float dt){
 		this.lastDelta = dt;
+		updateAnimation(dt);
 		super.update(dt);
 		if (getSpeed().getY() >= Constants.PLAYER_SINK_SPEED) setAcceleration(0, 0); //Stops accelerating after maximum speed is reached.
 		fixPosition();
@@ -38,8 +42,22 @@ public class Player extends Fish implements TouchListener {
 		}
 	}
 	
+	private void updateAnimation(float dt)
+	{
+		if(touchDown || currentFrame != 0) updateAnimationFrame(dt);
+//		if(!(getAcceleration().getY() <= 0)) updateAnimationFrame(dt);
+	}
+	
 	public float getLastDelta(){
 		return lastDelta;
+	}
+	
+	private void initPlayer()
+	{
+		setPosition((Constants.WINDOW_WIDTH)/2, (Constants.WINDOW_HEIGHT)/2);
+		addCollisionListener(new PlayerCollisionController());
+		sink();
+		setSizeByHeight(0.1f);
 	}
 	
 	private void sink() {
@@ -55,6 +73,7 @@ public class Player extends Fish implements TouchListener {
 	public boolean onTouchDown(MotionEvent event) {
 		flap();
 		touchDown = true;
+		frameTimeLeft += frameDuration;
 		return false;
 	}
 	

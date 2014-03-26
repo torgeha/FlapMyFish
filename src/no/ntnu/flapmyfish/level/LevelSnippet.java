@@ -24,12 +24,19 @@ public class LevelSnippet {
 	
 	private SpriteInfo[] getSnippetSprites(int id) {
 		SpriteInfo[] sprites;
-		if (true/*id == 1*/) {
-			sprites = new SpriteInfo[2];
+		if (true /*id == 1*/) {
+			sprites = new SpriteInfo[3];
 			sprites[0] = new SpriteInfo(5, 5, -Constants.MAX_ENEMY_SPEED, TokenType.FOOD);
 			sprites[1] = new SpriteInfo(3, 4, -Constants.MAX_ENEMY_SPEED, TokenType.SHARK);
-			//sprites[2] = new SpriteInfo(3, 4, -Constants.MAX_ENEMY_SPEED, TokenType.SHARK);
+			sprites[2] = new SpriteInfo(0, 0, -Constants.MAX_ENEMY_SPEED, TokenType.SHARK);
 		}
+//		else /*if (id > 5) */{
+//			sprites = new SpriteInfo[2];
+//			sprites[0] = new SpriteInfo(5, 5, -Constants.MAX_ENEMY_SPEED, TokenType.FOOD);
+//			sprites[1] = new SpriteInfo(3, 4, -Constants.MAX_ENEMY_SPEED, TokenType.SHARK);
+//			sprites[2] = new SpriteInfo(1, 1, -Constants.MAX_ENEMY_SPEED, TokenType.SHARK);
+//		}
+		
 		return sprites;
 	}
 	
@@ -37,15 +44,15 @@ public class LevelSnippet {
 		ExtendedSprite s;
 		if (spriteInfo.getType() == TokenType.SHARK) {
 			s = new Enemy(R.drawable.shark);
-//			s.setSizeByHeight(.12f);
+			s.setSizeByHeight(.14f);
 		}
 		else {//if (spriteInfo.getType() == TokenType.FOOD) {
 			s = new Food(R.drawable.food_fish);
-//			s.setSizeByHeight(.1f);
+			s.setSizeByHeight(.08f);
 		}
 		s.setXSpeed(spriteInfo.getSpeed());
 		float xPos = Constants.WINDOW_WIDTH*1.1f + (Constants.SNIPPET_WIDTH/Constants.NUMBER_OF_BLOCKS_X_DIR)*(spriteInfo.getXBlock());
-		float yPos = (s.getHeight()*.6f)+((Constants.WINDOW_HEIGHT-s.getHeight()*1.2f)/Constants.NUMBER_OF_BLOCKS_Y_DIR)*(spriteInfo.getYBlock());
+		float yPos = (s.getHeight()*.6f)+((Constants.WINDOW_HEIGHT-s.getHeight()*1.2f)/(Constants.NUMBER_OF_BLOCKS_Y_DIR-1))*(spriteInfo.getYBlock());
 		s.setPosition(xPos, yPos);
 		s.update(0);
 		return s;
