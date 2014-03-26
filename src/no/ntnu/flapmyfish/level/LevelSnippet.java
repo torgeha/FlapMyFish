@@ -9,6 +9,8 @@ import no.ntnu.flapmyfish.tokens.Food;
 public class LevelSnippet {
 
 	private SpriteInfo[] spriteInfos;
+	private int[] foodImgs = {R.drawable.victim_fish_frame1, R.drawable.victim_fish_frame2,
+			R.drawable.victim_fish_frame3, R.drawable.victim_fish_frame2};
 	
 	public LevelSnippet(int snippetId) {
 		spriteInfos = getSnippetSprites(snippetId);
@@ -47,7 +49,8 @@ public class LevelSnippet {
 			s.setSizeByHeight(.14f);
 		}
 		else {//if (spriteInfo.getType() == TokenType.FOOD) {
-			s = new Food(R.drawable.food_fish);
+			
+			s = new Food(foodImgs, 0.1f, 0);
 			s.setSizeByHeight(.08f);
 		}
 		s.setXSpeed(spriteInfo.getSpeed());
