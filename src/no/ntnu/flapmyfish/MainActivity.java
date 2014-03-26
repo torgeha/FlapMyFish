@@ -34,6 +34,8 @@ public class MainActivity extends Activity {
         Constants.WINDOW_HEIGHT = height;
         Constants.SNIPPET_WIDTH = Constants.WINDOW_WIDTH/3;
         
+        Constants.MAX_ENEMY_SPEED = (int)(0.2f*Constants.WINDOW_WIDTH);
+        
         //Get the screen's density scale
         Constants.SCALE = getResources().getDisplayMetrics().density;
         

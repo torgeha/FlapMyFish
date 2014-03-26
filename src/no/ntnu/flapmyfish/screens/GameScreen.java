@@ -55,7 +55,9 @@ public class GameScreen extends State {
 		foregroundLayer = new ExtendedLayer();
 		world.addLayer(foregroundLayer);
 		
-		Player player = new Player(R.drawable.hero_fish_v2);
+		int[] playerImgs = {R.drawable.hero_fish_frame1, R.drawable.hero_fish_frame2,
+				R.drawable.hero_fish_frame3, R.drawable.hero_fish_frame2};
+		Player player = new Player(playerImgs, 0.1f, 0);
 		addTouchListener(player);
 		colLayer.addSprite(player);
 		
