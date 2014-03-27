@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="no.ntnu.flapmyfish.MultiplayerActivity" />
+        <!-- <activity android:name="no.ntnu.flapmyfish.MultiplayerActivity" />  -->
         
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import no.ntnu.flapmyfish.Constants;
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
 import no.ntnu.flapmyfish.R;
+import no.ntnu.flapmyfish.controller.StateListener;
 import no.ntnu.flapmyfish.gui.ImageButton;
 import sheep.game.State;
 import sheep.graphics.Image;
@@ -18,6 +19,17 @@ public class MainMenuScreen extends State implements WidgetListener {
 
 	private LoopingBackgroundLayer loopingBgLayer;
 	private ArrayList<ImageButton> btns;
+	
+	public static final int BTN_ID_SINGLE_PLAYER = 500;
+	public static final int BTN_ID_MULTI_PLAYER = 501;
+	public static final int BTN_ID_INSTRUCTIONS = 502;
+	
+	private StateListener listener;
+	
+	public MainMenuScreen(StateListener listener){
+		this();
+		setStateListener(listener);
+	}
 
 	public MainMenuScreen(){
 		init();
@@ -33,11 +45,14 @@ public class MainMenuScreen extends State implements WidgetListener {
 	public void update(float dt){
 		loopingBgLayer.update(dt);
 	}
+	
+	public void setStateListener(StateListener listener){
+		this.listener = listener;
+	}
 
 	public void init(){
 		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background1);
-
-		generateButtons(new String[] {"Play", "Instructions", "Settings"});
+		generateButtons(new String[] {"Single player", "Multiplayer", "Instructions"});
 	}
 
 	private void generateButtons(String[] labels){
@@ -56,13 +71,14 @@ public class MainMenuScreen extends State implements WidgetListener {
 	public void actionPerformed(WidgetAction action) {
 		Widget source = action.getSource();
 		if (source == btns.get(0)){
-			//Play
+			//Single player
 			getGame().popState();
 			getGame().pushState(new GameScreen());			
 		} else if (source == btns.get(1)){
-			//Instructions			
+			//Multiplayer
+			listener.buttonClicked(BTN_ID_MULTI_PLAYER);
 		} else if (source == btns.get(2)){
-			//Settings			
+			//Instructions
 		}
 	}
 

@@ -1,6 +1,7 @@
 package no.ntnu.flapmyfish;
 
 import no.ntnu.flapmyfish.screens.MainMenuScreen;
+import no.ntnu.flapmyfish.screens.MultiplayerGameScreen;
 import sheep.game.Game;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,9 +9,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.Display;
 
-import com.google.example.games.basegameutils.BaseGameActivity;
-
-public class MainActivity extends BaseGameActivity {
+public class MainActivity extends MultiplayerActivity {
 
 	private Game game;
 	
@@ -43,7 +42,7 @@ public class MainActivity extends BaseGameActivity {
         int score = prefs.getInt("myHighscore", 0);
         Constants.HIGHSCORE = score;
 		
-		game.pushState(new MainMenuScreen());
+		game.pushState(new MainMenuScreen(this));
 //		game.pushState(new GameScreen());
 		setContentView(game);
 		
@@ -57,17 +56,15 @@ public class MainActivity extends BaseGameActivity {
 		editor.putInt("myHighscore", Constants.HIGHSCORE);
 		editor.commit();
 	}
-
-	@Override
-	public void onSignInFailed() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onSignInSucceeded() {
-		// TODO Auto-generated method stub
-		
+	
+	public void gameStateChanged(GameState state){
+		if (state == GameState.START){
+			//MultiplayerGameScreen mpGameScreen = new MultiplayerGameScreen(this);
+			mpGameScreen = new MultiplayerGameScreen(this);
+			game.pushState(mpGameScreen);
+			return;
+		}
+		super.gameStateChanged(state);
 	}
 
 }

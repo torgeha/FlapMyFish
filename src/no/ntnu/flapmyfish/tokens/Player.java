@@ -9,6 +9,8 @@ public class Player extends Fish implements TouchListener {
 	
 	private float lastDelta;
 	private boolean touchDown;
+	private int points;
+	private float counter;
 	
 	public Player(int resId) {
 		super(resId);
@@ -20,12 +22,27 @@ public class Player extends Fish implements TouchListener {
 	@Override
 	public void update(float dt){
 		this.lastDelta = dt;
+		counter += dt;
+		if ((counter / 1.0f) > Constants.SCORE_FREQUENCY) {
+			addPoints(Constants.TRAVEL_POINTS);
+			counter = 0f;
+		}
 		super.update(dt);
 		if (getSpeed().getY() >= Constants.PLAYER_SINK_SPEED) setAcceleration(0, 0); //Stops accelerating after maximum speed is reached.
 		fixPosition();
 		super.update(0);
 	}
 	
+	
+	
+	public int getPoints() {
+		return points;
+	}
+	
+	public void addPoints(int points){
+		this.points += points;
+	}
+
 	public void fixPosition(){
 		if((getPosition().getY()-getHeight()/2.0f)<=0){
 			//TOP

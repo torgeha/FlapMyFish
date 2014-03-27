@@ -17,7 +17,6 @@ public class PlayerCollisionController implements CollisionListener {
 	 */
 	@Override
 	public void collided(Sprite a, Sprite b) {
-		Player player = (Player) a;
 		/*if (b instanceof HorizontalBorder) {
 			HorizontalBorder hb = (HorizontalBorder) b;
 			if (hb.isTopBorder()) a.setPosition(a.getPosition().getX(), a.getPosition().getY()+player.getLastDelta()*Constants.PLAYER_FLAP_SPEED);
@@ -26,15 +25,17 @@ public class PlayerCollisionController implements CollisionListener {
 		}*/
 		if (b instanceof Food) {
 			b.die();
-			Score.getInstance().addFoodPoints();
+			Player player = (Player) a;
+			//Score.getInstance().addFoodPoints();
+			player.addPoints(Constants.FOOD_POINTS);
 		}
 		else if (b instanceof Enemy) {
 			//TODO: kill player, save score if new highscore, game over.
 			
 			//save score if new highscore
-			if (Constants.HIGHSCORE < Score.getInstance().getPoints()) {
+			/*if (Constants.HIGHSCORE < Score.getInstance().getPoints()) {
 				Constants.HIGHSCORE = Score.getInstance().getPoints();
-			}
+			}*/
 		}
 		
 	}

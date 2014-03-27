@@ -15,7 +15,9 @@ import android.graphics.Canvas;
 
 public class GameScreen extends State {
 
-	private World world;
+	protected World world;
+	protected Score score;
+	
 	private LoopingBackgroundLayer loopingBgLayer;
 	private CollisionLayer colLayer;
 	private ExtendedLayer foregroundLayer;
@@ -43,7 +45,13 @@ public class GameScreen extends State {
 		if (!countDownTimer.isFinished() || countDownTimer.hasAciveMessage()) countDownTimer.draw(canvas);
 	}
 	
-	private void init() {
+	Player player;
+	
+	public float getYPosition(){
+		return player.getPosition().getY();
+	}
+	
+	protected void init() {
 		world = new World();
 
 		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background1);
@@ -55,12 +63,15 @@ public class GameScreen extends State {
 		foregroundLayer = new ExtendedLayer();
 		world.addLayer(foregroundLayer);
 		
-		Player player = new Player(R.drawable.hero_fish_v2);
+		player = new Player(R.drawable.hero_fish_v2);
 		addTouchListener(player);
 		colLayer.addSprite(player);
 		
-		Score score = Score.getInstance();
+		score = new Score(player);
 		foregroundLayer.addSprite(score);
+		
+		score.setMultiplayer(true);
+		score.setOpponentPoints(542);
 		
 		countDownTimer = new CountDownTimer(3, "GO!");
 		
