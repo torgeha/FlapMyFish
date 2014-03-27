@@ -47,11 +47,13 @@ public class LoopingBackgroundLayer extends ExtendedLayer {
 	private void createBackgroundChain(int resId){
 		backgroundChain = new LinkedList<ExtendedSprite>();
 		Image img = new Image(resId);
-		imgWidth = img.getWidth();
+//		imgWidth = img.getWidth();
 		for (int i=0; i<NO_OF_SPRITES; i++){
 			ExtendedSprite s = new ExtendedSprite(img);
 			s.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 			s.setOffset(0, 0);
+//			s.setPosition(i*imgWidth, 0);
+			imgWidth = s.getWidth();
 			s.setPosition(i*imgWidth, 0);
 			s.setSpeed(-Constants.BACKGROUND_SPEED, 0);
 			addSprite(s);

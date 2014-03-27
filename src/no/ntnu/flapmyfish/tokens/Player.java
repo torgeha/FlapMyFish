@@ -58,6 +58,7 @@ public class Player extends Fish implements TouchListener {
 		addCollisionListener(new PlayerCollisionController());
 		sink();
 		setSizeByHeight(0.1f);
+		setShape(getWidth()/2, getHeight());
 	}
 	
 	private void sink() {

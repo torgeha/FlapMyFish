@@ -31,6 +31,10 @@ public class PlayerCollisionController implements CollisionListener {
 		else if (b instanceof Enemy) {
 			//TODO: kill player, save score if new highscore, game over.
 			
+			Enemy enemy = (Enemy)b;
+			enemy.closeJaws();
+//			player.die();
+			
 			//save score if new highscore
 			if (Constants.HIGHSCORE < Score.getInstance().getPoints()) {
 				Constants.HIGHSCORE = Score.getInstance().getPoints();

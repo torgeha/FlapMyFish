@@ -46,7 +46,7 @@ public class GameScreen extends State {
 	private void init() {
 		world = new World();
 
-		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background1);
+		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background_looper);
 		world.addLayer(loopingBgLayer);
 
 		colLayer = new CollisionLayer();
@@ -66,7 +66,7 @@ public class GameScreen extends State {
 		
 		countDownTimer = new CountDownTimer(3, "GO!");
 		
-		level = new Level(LevelFactory.generateLevel(), colLayer);
+		level = new Level(LevelFactory.generateLevel(), colLayer, player);
 	}
 
 	public World getWorld() {
