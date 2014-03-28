@@ -64,11 +64,15 @@ public class LevelSnippet {
 		if (spriteInfo.getType() == TokenType.SHARK) {
 			s = new Enemy(sharkImgs, 0.1f, 1, 3, player);
 			s.setSizeByHeight(.24f);
+			Enemy enemy = (Enemy) s;
+			enemy.initShape();
 		}
 		else {//if (spriteInfo.getType() == TokenType.FOOD) {
 			
 			s = new Food(foodImgs, 0.1f, 0);
 			s.setSizeByHeight(.08f);
+			Food food = (Food) s;
+			food.initShape();
 		}
 		s.setXSpeed(spriteInfo.getSpeed());
 		float xPos = Constants.WINDOW_WIDTH*1.1f + (Constants.SNIPPET_WIDTH/Constants.NUMBER_OF_BLOCKS_X_DIR)*(spriteInfo.getXBlock());

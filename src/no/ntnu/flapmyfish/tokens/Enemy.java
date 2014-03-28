@@ -43,6 +43,12 @@ public class Enemy extends Fish {
 		this.incValue = 1;
 	}
 	
+	public void initShape()
+	{
+		setShape(getWidth()/2, getHeight()/1.4f);
+		setShapeOffset(getOffset().getX()/2, 0);
+	}
+	
 	@Override
 	public void update(float dt) {
 		super.update(dt);
@@ -107,10 +113,13 @@ public class Enemy extends Fish {
 	{
 		float enemyTop = getPosition().getY()-(getHeight()/2);
 		float enemyBottom = getPosition().getY()+(getHeight()/2);
+		float enemyRight = getPosition().getX()+(getWidth()/2);
 		float targetTop = target.getPosition().getY()-(target.getHeight()/2);
 		float targetBottom = target.getPosition().getY()+(target.getHeight()/2);
-		if(targetTop <= enemyBottom && targetTop >= enemyTop ||
-				targetBottom <= enemyBottom && targetBottom >= enemyTop)
+		float targetLeft = target.getPosition().getX()-(target.getWidth()/2);
+		if((targetTop <= enemyBottom && targetTop >= enemyTop ||
+				targetBottom <= enemyBottom && targetBottom >= enemyTop) &&
+				targetLeft <= enemyRight)
 		{
 			isAlignedWithTarget = true;
 		}

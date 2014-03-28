@@ -57,7 +57,7 @@ public class GameScreen extends State {
 		
 		int[] playerImgs = {R.drawable.hero_fish_frame1, R.drawable.hero_fish_frame2,
 				R.drawable.hero_fish_frame3, R.drawable.hero_fish_frame2};
-		Player player = new Player(playerImgs, 0.1f, 0);
+		Player player = new Player(playerImgs, 0.14f, 0);
 		addTouchListener(player);
 		colLayer.addSprite(player);
 		

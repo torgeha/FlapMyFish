@@ -73,6 +73,13 @@ public class Sprite {
 	// frame.
 	Matrix matrix;
 	
+	//CHANGED HERE
+	//Separate matrix for the shape (to enable the shape to have an extra
+	//offset from the Sprite's position)
+	Matrix shapeMatrix;
+	//Extra offset for the shape
+	Vector2 shapeOffset = new Vector2(0.0f, 0.0f);
+	
 	// The groups and group mask.
 	long group = 0x0;
 	long mask = 0x0;
@@ -109,6 +116,9 @@ public class Sprite {
 		this.view = view;
 		matrix = new Matrix();
 		updateMatrix();
+		//CHANGED HERE
+		shapeMatrix = new Matrix();
+		updateShapeMatrix();
 	}
 	
 	/**
@@ -122,12 +132,15 @@ public class Sprite {
 		position.add(speed, dt);
 				
 		updateMatrix();
+		updateShapeMatrix();
 		
 		if(view != null)
 			view.update(dt);
 		
 		if(shape != null)
-			shape.update(dt, matrix);
+//			shape.update(dt, matrix);
+			//Changed here to use shapeMatrix instead of matrix for the shape
+			shape.update(dt, shapeMatrix);
 	}
 	
 	/**
@@ -165,6 +178,21 @@ public class Sprite {
 		matrix.preRotate(orientation);
 		matrix.preScale(scale.getX(), scale.getY());
 		matrix.preTranslate(-offset.getX(),-offset.getY());
+	}
+	
+	/**
+	 * Updates the current transformation matrix for the shape.
+	 */
+	private void updateShapeMatrix()
+	{
+		shapeMatrix.reset();
+		shapeMatrix.preTranslate(position.getX(), position.getY());
+		shapeMatrix.preRotate(orientation);
+		shapeMatrix.preScale(scale.getX(), scale.getY());
+		shapeMatrix.preTranslate(-offset.getX(),-offset.getY());
+//		shapeMatrix.preTranslate(-offset.getX()-shapeOffset.getX(),
+//				-offset.getY()-shapeOffset.getY());
+		shapeMatrix.preTranslate(shapeOffset.getX(),shapeOffset.getY());
 	}
 	
 	/**
@@ -418,6 +446,15 @@ public class Sprite {
 	 */
 	public void setOffset(float x, float y) {
 		this.offset.set(x, y);
+	}
+	
+	/**
+	 * Sets a new shapeOffset for the Sprite.
+	 * @param x The shapeOffset along the x-axis. 
+	 * @param y The shapeOffset along the y-axis.
+	 */
+	public void setShapeOffset(float x, float y) {
+		this.shapeOffset.set(x, y);
 	}
 	
 	/**
