@@ -1,7 +1,7 @@
 package no.ntnu.flapmyfish.tokens;
 
 import no.ntnu.flapmyfish.Constants;
-import sheep.game.Sprite;
+import no.ntnu.flapmyfish.util.KillListener;
 import sheep.graphics.Image;
 import sheep.graphics.SpriteView;
 
@@ -16,6 +16,7 @@ public class Enemy extends Fish {
 	private float eatingFrameTimeLeft;
 	private boolean hasReachedMaxBloodFrame;
 	private int incValue;
+	private KillListener killListener; 
 	
 	public Enemy(int resId) {
 		super(resId);
@@ -43,6 +44,10 @@ public class Enemy extends Fish {
 		this.incValue = 1;
 	}
 	
+	public void addKillListener(KillListener listener) {
+		killListener = listener;
+	}
+	
 	@Override
 	public void update(float dt) {
 		super.update(dt);
@@ -61,6 +66,7 @@ public class Enemy extends Fish {
 				if(currentBite == keyFramesMatrix.length-1)
 				{
 					hasReachedMaxBloodFrame = true;
+					killListener.fishKilled();
 				}
 				if(hasReachedMaxBloodFrame)
 				{

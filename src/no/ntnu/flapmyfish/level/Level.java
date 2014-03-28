@@ -11,6 +11,7 @@ public class Level {
 	private float timePassed;
 	private CollisionLayer collisionLayer;
 	private int nextSnippet;
+
 	
 	public Level(String levelString, CollisionLayer colLayer, Player player) {
 		nextSnippet = 0;

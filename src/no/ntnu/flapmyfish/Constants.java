@@ -33,8 +33,8 @@ public class Constants {
 	public static final float DEFAULT_VOLUME = 0.4f;
 	
 	//Level numbers
-	public static final int LEVEL_SNIPPET_POOL_SIZE = 10;
-	public static final int LEVEL_LENGTH = 10;
+	public static final int LEVEL_SNIPPET_POOL_SIZE = 8;
+	public static final int LEVEL_LENGTH = 100;
 	public static int MAX_ENEMY_SPEED;
 	public static final int NUMBER_OF_BLOCKS_X_DIR = 6;
 	public static final int NUMBER_OF_BLOCKS_Y_DIR = 6;
@@ -47,6 +47,6 @@ public class Constants {
 	public static float SCALE;
 	
 	//Animation constants
-	public static final float EATING_FRAME_DURATION = 0.05f;
+	public static final float EATING_FRAME_DURATION = 0.03f;
 
 }

@@ -1,11 +1,14 @@
 package no.ntnu.flapmyfish;
 
+import no.ntnu.flapmyfish.level.LevelSnippet;
+import no.ntnu.flapmyfish.screens.GameOverScreen;
 import no.ntnu.flapmyfish.screens.MainMenuScreen;
 import sheep.game.Game;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.Display;
 
@@ -19,7 +22,6 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		game = new Game(this, null);
 		
 //		  DisplayMetrics dm = new DisplayMetrics();
@@ -36,7 +38,7 @@ public class MainActivity extends Activity {
                 
         Constants.PLAYER_FLAP_SPEED = (int)(0.45f*Constants.WINDOW_HEIGHT);
         Constants.PLAYER_SINK_SPEED = (int)(0.35f*Constants.WINDOW_HEIGHT);
-        Constants.PLAYER_SINK_ACCELERATION = (int)(0.50f*Constants.WINDOW_HEIGHT);
+        Constants.PLAYER_SINK_ACCELERATION = (int)(0.80f*Constants.WINDOW_HEIGHT);
         Constants.BACKGROUND_SPEED = (int)(0.08f*Constants.WINDOW_WIDTH);
         Constants.MAX_ENEMY_SPEED = (int)(0.2f*Constants.WINDOW_WIDTH);
         
@@ -47,7 +49,10 @@ public class MainActivity extends Activity {
         SharedPreferences prefs = this.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
         int score = prefs.getInt("myHighscore", 0);
         Constants.HIGHSCORE = score;
-		
+        
+        //necessary for reading of levelsnippet file
+        LevelSnippet.am = getAssets();
+        
 		game.pushState(new MainMenuScreen());
 //		game.pushState(new GameScreen());
 		setContentView(game);
@@ -61,6 +66,6 @@ public class MainActivity extends Activity {
 		Editor editor = prefs.edit();
 		editor.putInt("myHighscore", Constants.HIGHSCORE);
 		editor.commit();
-	}	
+	}
 
 }

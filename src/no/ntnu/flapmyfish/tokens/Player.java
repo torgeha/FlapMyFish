@@ -28,17 +28,23 @@ public class Player extends Fish implements TouchListener {
 		if (getSpeed().getY() >= Constants.PLAYER_SINK_SPEED) setAcceleration(0, 0); //Stops accelerating after maximum speed is reached.
 		fixPosition();
 		super.update(0);
+		
+		if(touchDown) setAcceleration(0, 0);
+		else setAcceleration(0, Constants.PLAYER_SINK_ACCELERATION);
 	}
 	
 	public void fixPosition(){
 		if((getPosition().getY()-getHeight()/2.0f)<=0){
 			//TOP
 			setPosition(getPosition().getX(), getHeight()/2.0f);
-			if (!touchDown) setSpeed(0, 0);
+			setSpeed(0, -getSpeed().getY());
+//			if (!touchDown) setSpeed(0, 0);
 		} else if ((getPosition().getY()+getHeight()/2.0f)>=Constants.WINDOW_HEIGHT){
 			//BOTTOM
 			setPosition(getPosition().getX(), Constants.WINDOW_HEIGHT-getHeight()/2.0f);
-			if (!touchDown) setSpeed(0, 0);
+//			setSpeed(0, -getSpeed().getY());
+			setSpeed(0, -Constants.PLAYER_FLAP_SPEED);
+//			if (!touchDown) setSpeed(0, 0);
 		}
 	}
 	
@@ -55,7 +61,6 @@ public class Player extends Fish implements TouchListener {
 	private void initPlayer()
 	{
 		setPosition((Constants.WINDOW_WIDTH)/2, (Constants.WINDOW_HEIGHT)/2);
-		addCollisionListener(new PlayerCollisionController());
 		sink();
 		setSizeByHeight(0.1f);
 		setShape(getWidth()/2, getHeight());

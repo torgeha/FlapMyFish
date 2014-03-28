@@ -1,11 +1,20 @@
 package no.ntnu.flapmyfish.level;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Random;
+
 import no.ntnu.flapmyfish.Constants;
 import no.ntnu.flapmyfish.R;
 import no.ntnu.flapmyfish.tokens.Enemy;
 import no.ntnu.flapmyfish.tokens.ExtendedSprite;
 import no.ntnu.flapmyfish.tokens.Food;
 import no.ntnu.flapmyfish.tokens.Player;
+import android.content.res.AssetManager;
 
 public class LevelSnippet {
 
@@ -25,10 +34,24 @@ public class LevelSnippet {
 		{R.drawable.s_h_t_8_0,R.drawable.s_h_t_8_1,R.drawable.s_h_t_8_2,R.drawable.s_h_t_8_3,R.drawable.s_h_t_8_4,R.drawable.s_h_t_8_5,R.drawable.s_h_t_8_6,R.drawable.s_h_t_8_7,R.drawable.s_h_t_8_8,R.drawable.s_h_t_8_9,R.drawable.s_h_t_8_10}
 		};
 
+	private static String[][] snippets /*= {
+		{"5 5 -1.0 F","3 4 -1.0 E","0 0 -1.0 E"},
+		{"0 5 -1.0 E","2 1 -1.0 E","4 0 -1.0 F"},
+		{"0 2 -1.0 E","3 2 -1.0 F","3 3 -1.0 E"},
+		{"0 0 -1.0 E","2 3 -1.0 E","5 5 -1.0 E"},
+		{"3 1 -1.0 E","3 4 -1.0 E"},
+		{"0 2 -1.0 F","2 2 -1.0 E","4 4 -1.0 E"},
+		{"0 4 -1.0 E","2 2 -1.0 E","4 0 -1.0 E"},
+		{"0 2 -1.0 E","2 2 -1.0 F","4 2 -1.0 E"}
+}*/;
+	public static AssetManager am;
 	
 	private Player player;
 	
 	public LevelSnippet(int snippetId, Player player) {
+		if (snippets == null) {
+			readSnippets();
+		}
 		spriteInfos = getSnippetSprites(snippetId);
 		this.player = player;
 	}
@@ -43,12 +66,23 @@ public class LevelSnippet {
 	
 	private SpriteInfo[] getSnippetSprites(int id) {
 		SpriteInfo[] sprites;
-		if (true /*id == 1*/) {
-			sprites = new SpriteInfo[3];
-			sprites[0] = new SpriteInfo(5, 5, -Constants.MAX_ENEMY_SPEED, TokenType.FOOD);
-			sprites[1] = new SpriteInfo(3, 4, -Constants.MAX_ENEMY_SPEED, TokenType.SHARK);
-			sprites[2] = new SpriteInfo(0, 0, -Constants.MAX_ENEMY_SPEED, TokenType.SHARK);
-		}
+		String[] snippet = LevelSnippet.snippets[id];
+		sprites = new SpriteInfo[snippet.length];
+		for (int i = 0; i < snippet.length; i++) {
+			String[] sprite = snippet[i].split(" ");
+			float xBlock = Float.valueOf(sprite[0]);
+			float yBlock = Float.valueOf(sprite[1]);
+			float speed = Float.valueOf(sprite[2])*Constants.MAX_ENEMY_SPEED;
+			TokenType type = sprite[3].equals("E") ? TokenType.SHARK : TokenType.FOOD;
+			sprites[i] = new SpriteInfo(xBlock, yBlock, speed, type);	
+		} 
+		
+//		if (true /*id == 1*/) {
+//			sprites = new SpriteInfo[3];
+//			sprites[0] = new SpriteInfo(5, 5, -Constants.MAX_ENEMY_SPEED, TokenType.FOOD);
+//			sprites[1] = new SpriteInfo(3, 4, -Constants.MAX_ENEMY_SPEED, TokenType.SHARK);
+//			sprites[2] = new SpriteInfo(0, 0, -Constants.MAX_ENEMY_SPEED, TokenType.SHARK);
+//		}
 //		else /*if (id > 5) */{
 //			sprites = new SpriteInfo[2];
 //			sprites[0] = new SpriteInfo(5, 5, -Constants.MAX_ENEMY_SPEED, TokenType.FOOD);
@@ -56,13 +90,14 @@ public class LevelSnippet {
 //			sprites[2] = new SpriteInfo(1, 1, -Constants.MAX_ENEMY_SPEED, TokenType.SHARK);
 //		}
 		
+		
 		return sprites;
 	}
 	
 	private ExtendedSprite generateSpriteFromInfo(SpriteInfo spriteInfo) {
 		ExtendedSprite s;
 		if (spriteInfo.getType() == TokenType.SHARK) {
-			s = new Enemy(sharkImgs, 0.1f, 1, 3, player);
+			s = new Enemy(sharkImgs, 0.07f+(0.03f*-Constants.MAX_ENEMY_SPEED/spriteInfo.getSpeed()), new Random().nextInt(sharkImgs[0].length-1)+1, 3, player);
 			s.setSizeByHeight(.24f);
 		}
 		else {//if (spriteInfo.getType() == TokenType.FOOD) {
@@ -78,4 +113,43 @@ public class LevelSnippet {
 		return s;
 	}
 	
+	private void readSnippets() {
+		String path = "snippets.txt";
+		ArrayList<String[]> snippets = new ArrayList<String[]>();
+		InputStream is = null;
+		InputStreamReader ir = null;
+		BufferedReader br = null;
+		try {
+			is = LevelSnippet.am.open(path);
+			ir = new InputStreamReader(is);
+			br = new BufferedReader(ir);
+			String line; 
+			while ((line = br.readLine()) !=null) {
+				String[] sprites = line.split(";");
+				snippets.add(sprites);
+			}
+			LevelSnippet.snippets = snippets.toArray(new String[snippets.size()][0]);
+		} catch (FileNotFoundException e) {
+			System.out.println("Could not read file "+path);
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Could not read line");
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (is!=null) {
+					is.close();					
+				}
+				if (ir!=null) {
+					ir.close();					
+				}
+				if (br!=null) {
+					br.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
