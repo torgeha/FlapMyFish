@@ -16,6 +16,7 @@ public class Player extends Fish implements TouchListener {
 		super(resId);
 		setPosition((Constants.WINDOW_WIDTH)/2, (Constants.WINDOW_HEIGHT)/2);
 		addCollisionListener(new PlayerCollisionController());
+		
 		sink();
 	}
 	
@@ -63,7 +64,7 @@ public class Player extends Fish implements TouchListener {
 		setSpeed(0, Constants.PLAYER_SINK_SPEED);
 	}
 	
-	private void flap() {
+	public void flap() {
 		setAcceleration(0, 0);
 		setSpeed(0, -Constants.PLAYER_FLAP_SPEED);
 	}

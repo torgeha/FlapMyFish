@@ -7,7 +7,7 @@ import no.ntnu.flapmyfish.level.Level;
 import no.ntnu.flapmyfish.level.LevelFactory;
 import no.ntnu.flapmyfish.tokens.CountDownTimer;
 import no.ntnu.flapmyfish.tokens.Player;
-import no.ntnu.flapmyfish.tokens.Score;
+import no.ntnu.flapmyfish.tokens.ScoreBoard;
 import sheep.collision.CollisionLayer;
 import sheep.game.State;
 import sheep.game.World;
@@ -16,7 +16,7 @@ import android.graphics.Canvas;
 public class GameScreen extends State {
 
 	protected World world;
-	protected Score score;
+	protected ScoreBoard score;
 	
 	private LoopingBackgroundLayer loopingBgLayer;
 	private CollisionLayer colLayer;
@@ -67,7 +67,7 @@ public class GameScreen extends State {
 		addTouchListener(player);
 		colLayer.addSprite(player);
 		
-		score = new Score(player);
+		score = new ScoreBoard(player);
 		foregroundLayer.addSprite(score);
 		
 		score.setMultiplayer(true);

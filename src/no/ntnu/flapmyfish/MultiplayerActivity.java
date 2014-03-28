@@ -16,7 +16,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesActivityResultCodes;
+import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.GamesStatusCodes;
+import com.google.android.gms.games.multiplayer.Participant;
 import com.google.android.gms.games.multiplayer.realtime.RealTimeMessage;
 import com.google.android.gms.games.multiplayer.realtime.RealTimeMessageReceivedListener;
 import com.google.android.gms.games.multiplayer.realtime.Room;
@@ -38,7 +40,8 @@ public class MultiplayerActivity extends BaseGameActivity implements RoomUpdateL
 	// arbitrary request code for the waiting room UI.
 	// This can be any integer that's unique in your Activity.
 	final static int RC_WAITING_ROOM = 10002;
-
+	
+	
 	@Override
 	public void onJoinedRoom(int statusCode, Room room) {
 	    if (statusCode != GamesStatusCodes.STATUS_OK) {
@@ -132,6 +135,11 @@ public class MultiplayerActivity extends BaseGameActivity implements RoomUpdateL
 	@Override
 	public void onRealTimeMessageReceived(RealTimeMessage message) {
 		try {
+			
+			if (message.getMessageData().length == 0) {
+				mpGameScreen.flapOpponent();
+			}
+			
 			String decoded = new String(message.getMessageData(), "UTF-8");
 			String[] data = decoded.split(" ");
 			float y = Float.parseFloat(data[0]);
@@ -241,9 +249,23 @@ public class MultiplayerActivity extends BaseGameActivity implements RoomUpdateL
 	@Override
 	public void gameStateChanged(GameState state) {
 		if (state == GameState.MESSAGE_UPDATED){
-			Games.RealTimeMultiplayer.sendUnreliableMessageToOthers(getApiClient(), mpGameScreen.getMessage().getBytes(Charset.forName("UTF-8")), roomId);
+			Games.RealTimeMultiplayer.sendUnreliableMessageToAll(getApiClient(), mpGameScreen.getMessage().getBytes(Charset.forName("UTF-8")), roomId);
+		}
+		else if (state == GameState.FLAP) {
+			byte[] flap = new byte[0];
+			
+			Games.RealTimeMultiplayer.sendUnreliableMessageToAll(getApiClient(), flap, roomId);
 		}
 	}
+	
+//	private String getOtherPlayer(Room r, String myId) {
+//		for (String p : r.getParticipantIds()) {
+//			if (!p.equals(myId)) {
+//				return p;
+//			}
+//		}
+//		return null;
+//	}
 	
 	@Override
 	public void onActivityResult(int request, int response, Intent intent) {

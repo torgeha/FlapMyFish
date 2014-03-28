@@ -5,7 +5,7 @@ import no.ntnu.flapmyfish.tokens.Enemy;
 import no.ntnu.flapmyfish.tokens.Food;
 import no.ntnu.flapmyfish.tokens.HorizontalBorder;
 import no.ntnu.flapmyfish.tokens.Player;
-import no.ntnu.flapmyfish.tokens.Score;
+import no.ntnu.flapmyfish.tokens.ScoreBoard;
 import sheep.collision.CollisionListener;
 import sheep.game.Sprite;
 
