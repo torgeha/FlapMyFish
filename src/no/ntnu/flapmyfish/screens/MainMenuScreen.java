@@ -51,7 +51,7 @@ public class MainMenuScreen extends State implements WidgetListener {
 	}
 
 	public void init(){
-		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background1);
+		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background);
 		generateButtons(new String[] {"Single player", "Multiplayer", "Instructions"});
 	}
 

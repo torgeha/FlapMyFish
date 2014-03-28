@@ -59,7 +59,7 @@ public class GameScreen extends State {
 	protected void init() {
 		world = new World();
 
-		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background_looper);
+		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background);
 		world.addLayer(loopingBgLayer);
 
 		colLayer = new CollisionLayer();
@@ -71,7 +71,7 @@ public class GameScreen extends State {
 		int[] playerImgs = {R.drawable.hero_fish_frame1, R.drawable.hero_fish_frame2,
 				R.drawable.hero_fish_frame3, R.drawable.hero_fish_frame2};
 		player = new Player(playerImgs, 0.1f, 0);
-		player.addCollisionListener(new PlayerCollisionLister());
+		player.addCollisionListener(new PlayerCollisionListener());
 
 		addTouchListener(player);
 		colLayer.addSprite(player);
@@ -88,7 +88,7 @@ public class GameScreen extends State {
 		return world;
 	}
 	
-	private class PlayerCollisionLister implements CollisionListener, KillListener {
+	private class PlayerCollisionListener implements CollisionListener, KillListener {
 		
 		private Player player;
 		/**
@@ -96,9 +96,9 @@ public class GameScreen extends State {
 		 */
 		@Override
 		public void collided(Sprite a, Sprite b) {
+			player = (Player) a;
 			if (b instanceof Food) {
 				b.die();
-				Player player = (Player) a;
 				player.addPoints(Constants.FOOD_POINTS);
 			}
 			else if (b instanceof Enemy) {
