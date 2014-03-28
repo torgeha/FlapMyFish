@@ -1,6 +1,7 @@
 package no.ntnu.flapmyfish.tokens;
 
 import no.ntnu.flapmyfish.Constants;
+import no.ntnu.flapmyfish.controller.FlapListener;
 import no.ntnu.flapmyfish.controller.PlayerCollisionController;
 import sheep.input.TouchListener;
 import android.view.MotionEvent;
@@ -11,6 +12,7 @@ public class Player extends Fish implements TouchListener {
 	private boolean touchDown;
 	private int points;
 	private float counter;
+	private FlapListener flapListener;
 	
 	public Player(int resId) {
 		super(resId);
@@ -18,6 +20,10 @@ public class Player extends Fish implements TouchListener {
 		addCollisionListener(new PlayerCollisionController());
 		
 		sink();
+	}
+	
+	public void setFlapListener(FlapListener fl) {
+		this.flapListener = fl;
 	}
 	
 	@Override
@@ -67,11 +73,13 @@ public class Player extends Fish implements TouchListener {
 	public void flap() {
 		setAcceleration(0, 0);
 		setSpeed(0, -Constants.PLAYER_FLAP_SPEED);
+		
 	}
 	
 	@Override
 	public boolean onTouchDown(MotionEvent event) {
 		flap();
+		if (flapListener != null) flapListener.onFlap();
 		touchDown = true;
 		return false;
 	}

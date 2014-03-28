@@ -50,6 +50,8 @@ public class MultiplayerGameScreen extends GameScreen implements FlapListener{
 		score.setMultiplayer(true);
 		score.setOpponentPoints(0);
 		
+		this.player.setFlapListener(this);
+		
 		opponent.setPosition(Constants.WINDOW_WIDTH/2, Constants.WINDOW_HEIGHT/2);
 		
 		world.addLayer(remoteLayer);
