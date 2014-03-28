@@ -1,5 +1,6 @@
 package no.ntnu.flapmyfish;
 
+import no.ntnu.flapmyfish.controller.StateListener.GameState;
 import no.ntnu.flapmyfish.screens.MainMenuScreen;
 import no.ntnu.flapmyfish.screens.MultiplayerGameScreen;
 import sheep.game.Game;
@@ -65,8 +66,16 @@ public class MainActivity extends MultiplayerActivity {
 			mpGameScreen = new MultiplayerGameScreen(this);
 			game.pushState(mpGameScreen);
 			return;
+		} else if (state == GameState.FINISH){
+			submitScore(mpGameScreen.getPlayerScore());
+			launchLeaderboard();
 		}
 		super.gameStateChanged(state);
 	}
+	
+	/*@Override
+	public void onBackPressed(){
+		Game.getInstance().popState();
+	}*/
 
 }

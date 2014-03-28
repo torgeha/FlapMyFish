@@ -38,6 +38,8 @@ public class MultiplayerActivity extends BaseGameActivity implements RoomUpdateL
 	// arbitrary request code for the waiting room UI.
 	// This can be any integer that's unique in your Activity.
 	final static int RC_WAITING_ROOM = 10002;
+	
+	final static int RC_LEADERBOARD = 10003;
 
 	@Override
 	public void onJoinedRoom(int statusCode, Room room) {
@@ -245,6 +247,14 @@ public class MultiplayerActivity extends BaseGameActivity implements RoomUpdateL
 		}
 	}
 	
+	public void submitScore(int score){
+		Games.Leaderboards.submitScore(getApiClient(), getResources().getString(R.string.leaderboard_id), score);
+	}
+	
+	public void launchLeaderboard(){
+		startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(), getResources().getString(R.string.leaderboard_id)), RC_LEADERBOARD);
+	}
+	
 	@Override
 	public void onActivityResult(int request, int response, Intent intent) {
 	    if (request == RC_WAITING_ROOM) {
@@ -268,6 +278,8 @@ public class MultiplayerActivity extends BaseGameActivity implements RoomUpdateL
 	        }
 	    }
 	}
+	
+	
 
 
 }

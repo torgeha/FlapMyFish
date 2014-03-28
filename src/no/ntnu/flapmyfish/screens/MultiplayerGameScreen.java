@@ -10,18 +10,21 @@ import sheep.graphics.Image;
 
 public class MultiplayerGameScreen extends GameScreen {
 	
-	//private static MultiplayerGameScreen INSTANCE;
 	private StateListener listener;
 	private ExtendedLayer remoteLayer;
 	private Sprite opponent;
 	public String message;
+	private final float UPDATE_FREQUENCY = 0.05f; //20 times pr. sec
+	private float timeSinceLastMessage;
 	
-	/*public static MultiplayerGameScreen getInstance(){
-		if (INSTANCE == null) INSTANCE = new MultiplayerGameScreen();
-		return INSTANCE;
-	}*/
+	//TODO: Call listener.gameStateChanged(GameState.FINISH) to submit highscore and launch 'Hall of fame'
+	
+	public int getPlayerScore(){
+		return getPlayer().getPoints();
+	}
 	
 	public MultiplayerGameScreen(StateListener listener){
+		super();
 		this.listener = listener;
 	}
 	
@@ -31,8 +34,12 @@ public class MultiplayerGameScreen extends GameScreen {
 	
 	public void update(float dt){
 		super.update(dt);
-		message = getYPosition()/Constants.WINDOW_HEIGHT + " " + player.getPoints();
-		if (listener != null) listener.gameStateChanged(GameState.MESSAGE_UPDATED);
+		timeSinceLastMessage += dt;
+		if (timeSinceLastMessage > UPDATE_FREQUENCY){
+			message = getPlayer().getPosition().getY()/Constants.WINDOW_HEIGHT + " " + getPlayer().getPoints();
+			if (listener != null) listener.gameStateChanged(GameState.MESSAGE_UPDATED);
+			timeSinceLastMessage = 0;
+		}
 	}
 	
 	public String getMessage(){

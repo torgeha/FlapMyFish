@@ -23,6 +23,7 @@ public class GameScreen extends State {
 	private ExtendedLayer foregroundLayer;
 	private Level level;
 	private CountDownTimer countDownTimer;
+	private Player player;
 
 	public GameScreen() {
 		init();
@@ -45,10 +46,8 @@ public class GameScreen extends State {
 		if (!countDownTimer.isFinished() || countDownTimer.hasAciveMessage()) countDownTimer.draw(canvas);
 	}
 	
-	Player player;
-	
-	public float getYPosition(){
-		return player.getPosition().getY();
+	public Player getPlayer(){
+		return player;
 	}
 	
 	protected void init() {
@@ -65,7 +64,7 @@ public class GameScreen extends State {
 		
 		int[] playerImgs = {R.drawable.hero_fish_frame1, R.drawable.hero_fish_frame2,
 				R.drawable.hero_fish_frame3, R.drawable.hero_fish_frame2};
-		Player player = new Player(playerImgs, 0.1f, 0);
+		player = new Player(playerImgs, 0.1f, 0);
 		addTouchListener(player);
 		colLayer.addSprite(player);
 		

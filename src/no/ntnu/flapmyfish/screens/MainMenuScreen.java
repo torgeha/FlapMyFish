@@ -72,7 +72,7 @@ public class MainMenuScreen extends State implements WidgetListener {
 		Widget source = action.getSource();
 		if (source == btns.get(0)){
 			//Single player
-			getGame().popState();
+			//getGame().popState();
 			getGame().pushState(new GameScreen());			
 		} else if (source == btns.get(1)){
 			//Multiplayer
