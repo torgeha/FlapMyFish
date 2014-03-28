@@ -9,7 +9,6 @@ import no.ntnu.flapmyfish.level.LevelFactory;
 import no.ntnu.flapmyfish.tokens.CountDownTimer;
 import no.ntnu.flapmyfish.tokens.Enemy;
 import no.ntnu.flapmyfish.tokens.Food;
-import no.ntnu.flapmyfish.tokens.HorizontalBorder;
 import no.ntnu.flapmyfish.tokens.Player;
 import no.ntnu.flapmyfish.tokens.Score;
 import no.ntnu.flapmyfish.util.KillListener;
@@ -28,6 +27,7 @@ public class GameScreen extends State {
 	private ExtendedLayer foregroundLayer;
 	private Level level;
 	private CountDownTimer countDownTimer;
+	private Player player;
 
 	public GameScreen() {
 		init();
