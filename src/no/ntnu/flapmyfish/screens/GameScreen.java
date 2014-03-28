@@ -7,7 +7,7 @@ import no.ntnu.flapmyfish.level.Level;
 import no.ntnu.flapmyfish.level.LevelFactory;
 import no.ntnu.flapmyfish.tokens.CountDownTimer;
 import no.ntnu.flapmyfish.tokens.Player;
-import no.ntnu.flapmyfish.tokens.Score;
+import no.ntnu.flapmyfish.tokens.ScoreBoard;
 import sheep.collision.CollisionLayer;
 import sheep.game.State;
 import sheep.game.World;
@@ -15,7 +15,9 @@ import android.graphics.Canvas;
 
 public class GameScreen extends State {
 
-	private World world;
+	protected World world;
+	protected ScoreBoard score;
+	
 	private LoopingBackgroundLayer loopingBgLayer;
 	private CollisionLayer colLayer;
 	private ExtendedLayer foregroundLayer;
@@ -43,7 +45,13 @@ public class GameScreen extends State {
 		if (!countDownTimer.isFinished() || countDownTimer.hasAciveMessage()) countDownTimer.draw(canvas);
 	}
 	
-	private void init() {
+	Player player;
+	
+	public float getYPosition(){
+		return player.getPosition().getY();
+	}
+	
+	protected void init() {
 		world = new World();
 
 		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background1);
@@ -61,7 +69,7 @@ public class GameScreen extends State {
 		addTouchListener(player);
 		colLayer.addSprite(player);
 		
-		Score score = Score.getInstance();
+		score = new ScoreBoard(player);
 		foregroundLayer.addSprite(score);
 		
 		countDownTimer = new CountDownTimer(3, "GO!");

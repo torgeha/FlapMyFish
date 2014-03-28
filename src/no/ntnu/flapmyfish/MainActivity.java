@@ -1,15 +1,15 @@
 package no.ntnu.flapmyfish;
 
 import no.ntnu.flapmyfish.screens.MainMenuScreen;
+import no.ntnu.flapmyfish.screens.MultiplayerGameScreen;
 import sheep.game.Game;
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.Display;
 
-public class MainActivity extends Activity {
+public class MainActivity extends MultiplayerActivity {
 
 	private Game game;
 	
@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
         int score = prefs.getInt("myHighscore", 0);
         Constants.HIGHSCORE = score;
 		
-		game.pushState(new MainMenuScreen());
+		game.pushState(new MainMenuScreen(this));
 //		game.pushState(new GameScreen());
 		setContentView(game);
 		
@@ -57,6 +57,16 @@ public class MainActivity extends Activity {
 		Editor editor = prefs.edit();
 		editor.putInt("myHighscore", Constants.HIGHSCORE);
 		editor.commit();
-	}	
+	}
+	
+	public void gameStateChanged(GameState state){
+		if (state == GameState.START){
+			//MultiplayerGameScreen mpGameScreen = new MultiplayerGameScreen(this);
+			mpGameScreen = new MultiplayerGameScreen(this);
+			game.pushState(mpGameScreen);
+			return;
+		}
+		super.gameStateChanged(state);
+	}
 
 }
