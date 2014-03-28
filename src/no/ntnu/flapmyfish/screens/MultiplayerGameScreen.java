@@ -14,7 +14,7 @@ public class MultiplayerGameScreen extends GameScreen {
 	private ExtendedLayer remoteLayer;
 	private Sprite opponent;
 	public String message;
-	private final float UPDATE_FREQUENCY = 0.05f; //20 times pr. sec
+	private final float UPDATE_FREQUENCY = 0.1f; //10 times pr. sec
 	private float timeSinceLastMessage;
 	
 	//TODO: Call listener.gameStateChanged(GameState.FINISH) to submit highscore and launch 'Hall of fame'

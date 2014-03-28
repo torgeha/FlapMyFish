@@ -14,6 +14,13 @@ public class Food extends Fish {
 		super(keyFramesResIds, frameDuration, currentFrame);
 	}
 	
+	public void initShape()
+	{
+//		setShape(getWidth(), getHeight());
+//		setShape(getWidth()/2, getHeight()/1.2f);
+//		setShapeOffset(-getWidth(), 0);
+	}
+	
 	@Override
 	public void update(float dt) {
 		super.update(dt);

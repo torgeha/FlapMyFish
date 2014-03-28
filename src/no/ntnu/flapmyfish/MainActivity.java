@@ -1,12 +1,15 @@
 package no.ntnu.flapmyfish;
 
 import no.ntnu.flapmyfish.controller.StateListener.GameState;
+import no.ntnu.flapmyfish.level.LevelSnippet;
+import no.ntnu.flapmyfish.screens.GameOverScreen;
 import no.ntnu.flapmyfish.screens.MainMenuScreen;
 import no.ntnu.flapmyfish.screens.MultiplayerGameScreen;
 import sheep.game.Game;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.Display;
 
@@ -20,7 +23,6 @@ public class MainActivity extends MultiplayerActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		game = new Game(this, null);
 		
 //		  DisplayMetrics dm = new DisplayMetrics();
@@ -34,7 +36,11 @@ public class MainActivity extends MultiplayerActivity {
         Constants.WINDOW_WIDTH  = width;
         Constants.WINDOW_HEIGHT = height;
         Constants.SNIPPET_WIDTH = Constants.WINDOW_WIDTH/3;
-        
+                
+        Constants.PLAYER_FLAP_SPEED = (int)(0.45f*Constants.WINDOW_HEIGHT);
+        Constants.PLAYER_SINK_SPEED = (int)(0.35f*Constants.WINDOW_HEIGHT);
+        Constants.PLAYER_SINK_ACCELERATION = (int)(0.80f*Constants.WINDOW_HEIGHT);
+        Constants.BACKGROUND_SPEED = (int)(0.08f*Constants.WINDOW_WIDTH);
         Constants.MAX_ENEMY_SPEED = (int)(0.2f*Constants.WINDOW_WIDTH);
         
         //Get the screen's density scale
@@ -46,6 +52,10 @@ public class MainActivity extends MultiplayerActivity {
         Constants.HIGHSCORE = score;
 		
 		game.pushState(new MainMenuScreen(this));
+        
+        //necessary for reading of levelsnippet file
+        LevelSnippet.am = getAssets();
+
 //		game.pushState(new GameScreen());
 		setContentView(game);
 		

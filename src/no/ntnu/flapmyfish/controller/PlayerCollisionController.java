@@ -1,6 +1,8 @@
 package no.ntnu.flapmyfish.controller;
 
 import no.ntnu.flapmyfish.Constants;
+import no.ntnu.flapmyfish.MainActivity;
+import no.ntnu.flapmyfish.screens.GameOverScreen;
 import no.ntnu.flapmyfish.tokens.Enemy;
 import no.ntnu.flapmyfish.tokens.Food;
 import no.ntnu.flapmyfish.tokens.HorizontalBorder;
@@ -32,6 +34,10 @@ public class PlayerCollisionController implements CollisionListener {
 		else if (b instanceof Enemy) {
 			//TODO: kill player, save score if new highscore, game over.
 			
+			Enemy enemy = (Enemy)b;
+			enemy.closeJaws();
+//			player.die();
+			//TODO: run blood splatter animation
 			//save score if new highscore
 			/*if (Constants.HIGHSCORE < Score.getInstance().getPoints()) {
 				Constants.HIGHSCORE = Score.getInstance().getPoints();

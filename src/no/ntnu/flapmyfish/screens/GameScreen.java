@@ -1,14 +1,20 @@
 package no.ntnu.flapmyfish.screens;
 
+import no.ntnu.flapmyfish.Constants;
 import no.ntnu.flapmyfish.ExtendedLayer;
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
 import no.ntnu.flapmyfish.R;
 import no.ntnu.flapmyfish.level.Level;
 import no.ntnu.flapmyfish.level.LevelFactory;
 import no.ntnu.flapmyfish.tokens.CountDownTimer;
+import no.ntnu.flapmyfish.tokens.Enemy;
+import no.ntnu.flapmyfish.tokens.Food;
 import no.ntnu.flapmyfish.tokens.Player;
 import no.ntnu.flapmyfish.tokens.ScoreBoard;
+import no.ntnu.flapmyfish.util.KillListener;
 import sheep.collision.CollisionLayer;
+import sheep.collision.CollisionListener;
+import sheep.game.Sprite;
 import sheep.game.State;
 import sheep.game.World;
 import android.graphics.Canvas;
@@ -53,7 +59,7 @@ public class GameScreen extends State {
 	protected void init() {
 		world = new World();
 
-		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background1);
+		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background_looper);
 		world.addLayer(loopingBgLayer);
 
 		colLayer = new CollisionLayer();
@@ -65,6 +71,8 @@ public class GameScreen extends State {
 		int[] playerImgs = {R.drawable.hero_fish_frame1, R.drawable.hero_fish_frame2,
 				R.drawable.hero_fish_frame3, R.drawable.hero_fish_frame2};
 		player = new Player(playerImgs, 0.1f, 0);
+		player.addCollisionListener(new PlayerCollisionLister());
+
 		addTouchListener(player);
 		colLayer.addSprite(player);
 		
@@ -73,10 +81,46 @@ public class GameScreen extends State {
 		
 		countDownTimer = new CountDownTimer(3, "GO!");
 		
-		level = new Level(LevelFactory.generateLevel(), colLayer);
+		level = new Level(LevelFactory.generateLevel(), colLayer, player);
 	}
 
 	public World getWorld() {
 		return world;
+	}
+	
+	private class PlayerCollisionLister implements CollisionListener, KillListener {
+		
+		private Player player;
+		/**
+		 * Sprite a = player, Sprite b = other
+		 */
+		@Override
+		public void collided(Sprite a, Sprite b) {
+			if (b instanceof Food) {
+				b.die();
+				Player player = (Player) a;
+				player.addPoints(Constants.FOOD_POINTS);
+			}
+			else if (b instanceof Enemy) {
+				//TODO: kill player, save score if new highscore, game over.
+				
+				Enemy enemy = (Enemy)b;
+				enemy.closeJaws();
+				enemy.addKillListener(this);
+				player.setSpeed(enemy.getSpeed());
+				//TODO: run blood splatter animation
+				//save score if new highscore
+			}
+			
+		}
+		
+		public void fishKilled() {
+			player.die();
+			if (Constants.HIGHSCORE < player.getPoints()) {
+				Constants.HIGHSCORE = player.getPoints();
+			}
+			getGame().pushState(new GameOverScreen());
+			
+		}
 	}
 }

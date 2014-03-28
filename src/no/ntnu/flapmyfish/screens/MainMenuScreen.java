@@ -79,6 +79,7 @@ public class MainMenuScreen extends State implements WidgetListener {
 			listener.buttonClicked(BTN_ID_MULTI_PLAYER);
 		} else if (source == btns.get(2)){
 			//Instructions
+			getGame().pushState(new InstructionsScreen());
 		}
 	}
 
