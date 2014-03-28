@@ -16,11 +16,11 @@ public class Constants {
 	//should be between 0.1f and 1.5f
 	public static final float SCORE_FREQUENCY = 0.5f;
 	
-	public static final float PLAYER_FLAP_SPEED = 200;
-	public static final float PLAYER_SINK_SPEED = 150;
-	public static final float PLAYER_FLAP_ACCELERATION = 200;
-	public static final float PLAYER_SINK_ACCELERATION = 200;
-	public static final float BACKGROUND_SPEED = 50;
+	public static float PLAYER_FLAP_SPEED/* = 200*/;
+	public static float PLAYER_SINK_SPEED/* = 150*/;
+	public static float PLAYER_FLAP_ACCELERATION/* = 200*/;
+	public static float PLAYER_SINK_ACCELERATION/* = 200*/;
+	public static float BACKGROUND_SPEED/* = 50*/;
 	
 	//Change relative to screen size
 	public static final float PLAYER_STARTING_POSITION_X = 30;
@@ -33,8 +33,8 @@ public class Constants {
 	public static final float DEFAULT_VOLUME = 0.4f;
 	
 	//Level numbers
-	public static final int LEVEL_SNIPPET_POOL_SIZE = 10;
-	public static final int LEVEL_LENGTH = 10;
+	public static final int LEVEL_SNIPPET_POOL_SIZE = 8;
+	public static final int LEVEL_LENGTH = 100;
 	public static int MAX_ENEMY_SPEED;
 	public static final int NUMBER_OF_BLOCKS_X_DIR = 6;
 	public static final int NUMBER_OF_BLOCKS_Y_DIR = 6;
@@ -45,5 +45,8 @@ public class Constants {
 	
 	//Factors to support different screen sizes/densities
 	public static float SCALE;
+	
+	//Animation constants
+	public static final float EATING_FRAME_DURATION = 0.03f;
 
 }

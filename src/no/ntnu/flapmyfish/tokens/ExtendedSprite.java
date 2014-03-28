@@ -6,8 +6,8 @@ import sheep.graphics.Image;
 
 public class ExtendedSprite extends Sprite
 {
-	private float imageWidth;
-	private float imageHeight;
+	public float imageWidth;
+	public float imageHeight;
 	float xRatio;
 	float yRatio;
 	private float imageRatio;
@@ -79,6 +79,7 @@ public class ExtendedSprite extends Sprite
 	 */
 	public float getWidth()
 	{
+//		System.out.println(getScale().getX());
 		return imageWidth*getScale().getX();
 	}
 	
