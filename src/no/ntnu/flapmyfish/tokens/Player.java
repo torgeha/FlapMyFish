@@ -97,6 +97,7 @@ public class Player extends Fish implements TouchListener {
 	private void flap() {
 		setAcceleration(0, 0);
 		setSpeed(0, -Constants.PLAYER_FLAP_SPEED);
+		Constants.FLAP_SOUND.play();
 	}
 	
 	@Override
