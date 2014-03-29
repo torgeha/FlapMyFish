@@ -19,7 +19,7 @@ import android.graphics.Canvas;
 public class GameOverScreen extends State implements WidgetListener{
 
 	private ExtendedSprite gameOverBackground;
-	private ArrayList<ImageButton> buttons;
+	private ArrayList<ImageButton> btns;
 	
 	public GameOverScreen() {
 		init();
@@ -33,14 +33,13 @@ public class GameOverScreen extends State implements WidgetListener{
 //		gameOverBackground.setOffset(0, 0);
 		gameOverBackground.setPosition(Constants.WINDOW_WIDTH/2, Constants.WINDOW_HEIGHT/2);
 //		gameOverBackground.setPosition(gameOverBackground.getWidth(), 0);
-		buttons = new ArrayList<ImageButton>();
 		generateButtons(new String[]{"Main menu", "Play again"});
 	}
 	
 	public void draw(Canvas canvas) {
 		getGame().getPreviousState().draw(canvas);
 		gameOverBackground.draw(canvas);
-		for (ImageButton button : buttons) {
+		for (ImageButton button : btns) {
 			button.draw(canvas);
 		}
 	}
@@ -49,27 +48,30 @@ public class GameOverScreen extends State implements WidgetListener{
 		gameOverBackground.update(dt);
 	}
 	
-	private void generateButtons(String[] labels) {
-		Image[] buttonImages = new Image[]{new Image(R.drawable.btn_go_menu_idle), new Image(R.drawable.btn_go_menu_down)};
-		ImageButton button1 = new ImageButton(Constants.WINDOW_WIDTH/2, Constants.WINDOW_HEIGHT/1.5f, labels[0], buttonImages);
-		ImageButton button2 = new ImageButton(Constants.WINDOW_WIDTH/2, Constants.WINDOW_HEIGHT/1.15f, labels[1], buttonImages);
-		
-		for (ImageButton button : new ImageButton[]{button1, button2}) {
-			addTouchListener(button);
-			button.addWidgetListener(this);
-			buttons.add(button);
+	private void generateButtons(String[] labels){		
+		btns = new ArrayList<ImageButton>();
+		for (int i=0; i<labels.length; i++){
+			ExtendedSprite idle = new ExtendedSprite(new Image(R.drawable.btn_go_menu_idle));
+			ExtendedSprite down = new ExtendedSprite(new Image(R.drawable.btn_go_menu_down));
+			idle.setSizeByHeight(0.17f);
+			down.setSizeByHeight(0.17f);
+			ExtendedSprite[] btn_sprites = new ExtendedSprite[]{idle, down};
+			float y = (i == 0) ? Constants.WINDOW_HEIGHT / 1.5f : btns.get(i-1).getPosition().getY()+(1.2f * btn_sprites[0].getHeight());			
+			ImageButton btn = new ImageButton(Constants.WINDOW_WIDTH/2, y, labels[i], btn_sprites);
+			addTouchListener(btn);
+			btn.addWidgetListener(this);
+			btns.add(btn);
 		}
-		
 	}
 
 	@Override
 	public void actionPerformed(WidgetAction action) {
 		Widget source = action.getSource();
-		if (source == buttons.get(0)) {
+		if (source == btns.get(0)) {
 			getGame().popState();
 			getGame().popState();
 		}
-		else if (source == buttons.get(1)) {
+		else if (source == btns.get(1)) {
 			if (MainActivity.getListenerInstance().getCurrentGameScreenType() == GameScreenType.SINGLEPLAYER){
 				System.out.println("Starting new singleplayer game");
 				GameScreen gameScreen = new GameScreen();
