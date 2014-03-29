@@ -85,9 +85,8 @@ public class Player extends Fish implements TouchListener {
 		setPosition((Constants.WINDOW_WIDTH)/2, (Constants.WINDOW_HEIGHT)/2);
 		sink();
 		setSizeByHeight(0.1f);
-		setShape(getWidth(), getHeight());
-//		setShape(getWidth()/2, getHeight()/1.2f);
-//		setShapeOffset(getWidth()/4, 0);
+		setShape(getWidth()/getScale().getX()/4.0f, getHeight()/getScale().getY()/1.1f);
+		setShapeOffset(getWidth()/getScale().getX()/4*3, 0);
 	}
 	
 	private void sink() {

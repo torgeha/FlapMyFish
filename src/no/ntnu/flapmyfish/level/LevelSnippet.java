@@ -105,7 +105,7 @@ public class LevelSnippet {
 		else {//if (spriteInfo.getType() == TokenType.FOOD) {
 			
 			s = new Food(foodImgs, 0.1f, 0);
-			s.setSizeByHeight(.08f);
+			s.setSizeByHeight(.06f);
 			Food food = (Food) s;
 			food.initShape();
 		}
