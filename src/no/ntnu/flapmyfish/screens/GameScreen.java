@@ -3,7 +3,9 @@ package no.ntnu.flapmyfish.screens;
 import no.ntnu.flapmyfish.Constants;
 import no.ntnu.flapmyfish.ExtendedLayer;
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
+import no.ntnu.flapmyfish.MainActivity;
 import no.ntnu.flapmyfish.R;
+import no.ntnu.flapmyfish.controller.StateListener.GameState;
 import no.ntnu.flapmyfish.level.Level;
 import no.ntnu.flapmyfish.level.LevelFactory;
 import no.ntnu.flapmyfish.tokens.CountDownTimer;
@@ -30,6 +32,7 @@ public class GameScreen extends State {
 	private Level level;
 	private CountDownTimer countDownTimer;
 	private Player player;
+	private String levelString;
 
 	public GameScreen() {
 		init();
@@ -81,11 +84,25 @@ public class GameScreen extends State {
 		
 		countDownTimer = new CountDownTimer(3, "GO!");
 		
-		level = new Level(LevelFactory.generateLevel(), colLayer, player);
+		levelString = LevelFactory.generateLevel();
+		level = new Level(levelString, colLayer, player);
+	}
+	
+	public String getLevelString(){
+		return levelString;
+	}
+	
+	public void setLevel(String levelString){
+		this.levelString = levelString;
+		level = new Level(levelString, colLayer, player);
 	}
 
 	public World getWorld() {
 		return world;
+	}
+	
+	public int getPlayerScore(){
+		return getPlayer().getPoints();
 	}
 	
 	private class PlayerCollisionListener implements CollisionListener, KillListener {
@@ -119,6 +136,7 @@ public class GameScreen extends State {
 			if (Constants.HIGHSCORE < player.getPoints()) {
 				Constants.HIGHSCORE = player.getPoints();
 			}
+			MainActivity.getListenerInstance().gameStateChanged(GameState.END_MATCH);
 			getGame().pushState(new GameOverScreen());
 			
 		}

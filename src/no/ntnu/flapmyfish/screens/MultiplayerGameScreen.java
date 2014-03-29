@@ -18,10 +18,7 @@ public class MultiplayerGameScreen extends GameScreen {
 	private float timeSinceLastMessage;
 	
 	//TODO: Call listener.gameStateChanged(GameState.FINISH) to submit highscore and launch 'Hall of fame'
-	
-	public int getPlayerScore(){
-		return getPlayer().getPoints();
-	}
+
 	
 	public MultiplayerGameScreen(StateListener listener){
 		super();

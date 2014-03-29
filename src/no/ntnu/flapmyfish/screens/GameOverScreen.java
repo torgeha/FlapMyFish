@@ -3,7 +3,10 @@ package no.ntnu.flapmyfish.screens;
 import java.util.ArrayList;
 
 import no.ntnu.flapmyfish.Constants;
+import no.ntnu.flapmyfish.MainActivity;
 import no.ntnu.flapmyfish.R;
+import no.ntnu.flapmyfish.controller.GameListener.GameScreenType;
+import no.ntnu.flapmyfish.controller.StateListener.GameState;
 import no.ntnu.flapmyfish.gui.ImageButton;
 import no.ntnu.flapmyfish.tokens.ExtendedSprite;
 import sheep.game.State;
@@ -31,7 +34,7 @@ public class GameOverScreen extends State implements WidgetListener{
 		gameOverBackground.setPosition(Constants.WINDOW_WIDTH/2, Constants.WINDOW_HEIGHT/2);
 //		gameOverBackground.setPosition(gameOverBackground.getWidth(), 0);
 		buttons = new ArrayList<ImageButton>();
-		generateButtons(new String[]{"Main Menu", "Try Again"});
+		generateButtons(new String[]{"Main menu", "Play again"});
 	}
 	
 	public void draw(Canvas canvas) {
@@ -63,11 +66,22 @@ public class GameOverScreen extends State implements WidgetListener{
 	public void actionPerformed(WidgetAction action) {
 		Widget source = action.getSource();
 		if (source == buttons.get(0)) {
-			getGame().popState(2);
+			getGame().popState();
+			getGame().popState();
 		}
 		else if (source == buttons.get(1)) {
-			getGame().popState(2);
-			getGame().pushState(new GameScreen());
+			if (MainActivity.getListenerInstance().getCurrentGameScreenType() == GameScreenType.SINGLEPLAYER){
+				System.out.println("Starting new singleplayer game");
+				GameScreen gameScreen = new GameScreen();
+				getGame().popState();
+				getGame().popState();
+				getGame().pushState(gameScreen);				
+			} else if (MainActivity.getListenerInstance().getCurrentGameScreenType() == GameScreenType.MULTIPLAYER){
+				System.out.println("Starting new multiplayer game");
+				getGame().popState();
+				getGame().popState();
+				MainActivity.getListenerInstance().gameStateChanged(GameState.START_MP);
+			}
 		}
 	}
 }

@@ -6,6 +6,7 @@ import no.ntnu.flapmyfish.Constants;
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
 import no.ntnu.flapmyfish.R;
 import no.ntnu.flapmyfish.controller.StateListener;
+import no.ntnu.flapmyfish.controller.StateListener.GameState;
 import no.ntnu.flapmyfish.gui.ImageButton;
 import sheep.game.State;
 import sheep.graphics.Image;
@@ -73,12 +74,15 @@ public class MainMenuScreen extends State implements WidgetListener {
 		if (source == btns.get(0)){
 			//Single player
 			//getGame().popState();
-			getGame().pushState(new GameScreen());			
+			listener.buttonClicked(BTN_ID_SINGLE_PLAYER);
+			listener.gameStateChanged(GameState.START_SP);
+			//getGame().pushState(new GameScreen());
 		} else if (source == btns.get(1)){
 			//Multiplayer
 			listener.buttonClicked(BTN_ID_MULTI_PLAYER);
 		} else if (source == btns.get(2)){
 			//Instructions
+			listener.buttonClicked(BTN_ID_INSTRUCTIONS);
 			getGame().pushState(new InstructionsScreen());
 		}
 	}

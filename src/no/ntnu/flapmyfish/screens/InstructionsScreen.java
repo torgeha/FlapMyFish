@@ -32,7 +32,7 @@ public class InstructionsScreen extends State {
 		background.update(dt);
 	}
 	
-	public boolean onTouchDown(MotionEvent motionEvent) {
+	public boolean onTouchUp(MotionEvent motionEvent) {
 		getGame().popState();
 		return true;
 	}

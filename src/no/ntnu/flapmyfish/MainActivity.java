@@ -1,15 +1,14 @@
 package no.ntnu.flapmyfish;
 
-import no.ntnu.flapmyfish.controller.StateListener.GameState;
+import no.ntnu.flapmyfish.controller.GameListener;
 import no.ntnu.flapmyfish.level.LevelSnippet;
-import no.ntnu.flapmyfish.screens.GameOverScreen;
+import no.ntnu.flapmyfish.screens.GameScreen;
 import no.ntnu.flapmyfish.screens.MainMenuScreen;
 import no.ntnu.flapmyfish.screens.MultiplayerGameScreen;
 import sheep.game.Game;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.Display;
 
@@ -17,12 +16,19 @@ public class MainActivity extends MultiplayerActivity {
 
 	private Game game;
 	
+	private static GameListener MAIN_LISTENER;
+	
 	//Volume for sound
 	public static float volume = Constants.DEFAULT_VOLUME;
+	
+	public static GameListener getListenerInstance(){
+		return MAIN_LISTENER;
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		MAIN_LISTENER = this;
 		game = new Game(this, null);
 		
 //		  DisplayMetrics dm = new DisplayMetrics();
@@ -57,8 +63,13 @@ public class MainActivity extends MultiplayerActivity {
         LevelSnippet.am = getAssets();
 
 //		game.pushState(new GameScreen());
-		setContentView(game);
-		
+		setContentView(game);	
+	}
+	
+	public GameScreenType getCurrentGameScreenType(){
+		if (currentGameScreen instanceof MultiplayerGameScreen) return GameScreenType.MULTIPLAYER;
+		else if (currentGameScreen instanceof GameScreen) return GameScreenType.SINGLEPLAYER;
+		else return null;
 	}
 	
 	protected void onPause() {
@@ -69,23 +80,5 @@ public class MainActivity extends MultiplayerActivity {
 		editor.putInt("myHighscore", Constants.HIGHSCORE);
 		editor.commit();
 	}
-	
-	public void gameStateChanged(GameState state){
-		if (state == GameState.START){
-			//MultiplayerGameScreen mpGameScreen = new MultiplayerGameScreen(this);
-			mpGameScreen = new MultiplayerGameScreen(this);
-			game.pushState(mpGameScreen);
-			return;
-		} else if (state == GameState.FINISH){
-			submitScore(mpGameScreen.getPlayerScore());
-			launchLeaderboard();
-		}
-		super.gameStateChanged(state);
-	}
-	
-	/*@Override
-	public void onBackPressed(){
-		Game.getInstance().popState();
-	}*/
 
 }
