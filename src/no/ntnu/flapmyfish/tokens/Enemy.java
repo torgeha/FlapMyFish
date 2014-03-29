@@ -1,7 +1,10 @@
 package no.ntnu.flapmyfish.tokens;
 
+import android.graphics.Canvas;
 import no.ntnu.flapmyfish.Constants;
+import no.ntnu.flapmyfish.R;
 import no.ntnu.flapmyfish.util.KillListener;
+import sheep.game.Sprite;
 import sheep.graphics.Image;
 import sheep.graphics.SpriteView;
 
@@ -16,7 +19,7 @@ public class Enemy extends Fish {
 	private float eatingFrameTimeLeft;
 	private boolean hasReachedMaxBloodFrame;
 	private int incValue;
-	private KillListener killListener; 
+	private KillListener killListener;
 	
 	public Enemy(int resId) {
 		super(resId);
@@ -50,8 +53,8 @@ public class Enemy extends Fish {
 
 	public void initShape()
 	{
-		setShape(getWidth()/2, getHeight()/1.4f);
-		setShapeOffset(getOffset().getX()/2, 0);
+		setShape(getWidth()/getScale().getX()/3.0f, getHeight()/getScale().getY()/3f);
+		setShapeOffset(getWidth()/getScale().getX()/16, getHeight()/getScale().getY()/8f*3);
 	}
 	
 	@Override

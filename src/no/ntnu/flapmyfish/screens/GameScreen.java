@@ -108,6 +108,7 @@ public class GameScreen extends State {
 	private class PlayerCollisionListener implements CollisionListener, KillListener {
 		
 		private Player player;
+		private boolean collidedWithShark = false;
 		/**
 		 * Sprite a = player, Sprite b = other
 		 */
@@ -117,15 +118,17 @@ public class GameScreen extends State {
 			if (b instanceof Food) {
 				b.die();
 				player.addPoints(Constants.FOOD_POINTS);
+				Constants.EAT_SOUND.play();
 			}
-			else if (b instanceof Enemy) {
+			else if (b instanceof Enemy && !collidedWithShark) {
 				//TODO: kill player, save score if new highscore, game over.
 				
 				Enemy enemy = (Enemy)b;
 				enemy.closeJaws();
+				Constants.SPLAT.play();
 				enemy.addKillListener(this);
 				player.setSpeed(enemy.getSpeed());
-				//TODO: run blood splatter animation
+				collidedWithShark = true;
 				//save score if new highscore
 			}
 			

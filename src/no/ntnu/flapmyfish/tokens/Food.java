@@ -1,9 +1,5 @@
 package no.ntnu.flapmyfish.tokens;
 
-import no.ntnu.flapmyfish.Constants;
-import sheep.game.Sprite;
-import sheep.graphics.Image;
-
 public class Food extends Fish {
 	
 	public Food(int resId) {
@@ -16,8 +12,7 @@ public class Food extends Fish {
 	
 	public void initShape()
 	{
-//		setShape(getWidth(), getHeight());
-//		setShape(getWidth()/2, getHeight()/1.2f);
+		setShape(getWidth()/getScale().getX(), getHeight()/getScale().getY()/1.1f);
 //		setShapeOffset(-getWidth(), 0);
 	}
 	

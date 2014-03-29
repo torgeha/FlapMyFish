@@ -1,5 +1,6 @@
 package no.ntnu.flapmyfish;
 
+import sheep.audio.Sound;
 import sheep.graphics.Font;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -48,5 +49,9 @@ public class Constants {
 	
 	//Animation constants
 	public static final float EATING_FRAME_DURATION = 0.03f;
-
+	
+	//Sounds
+	public static final Sound FLAP_SOUND = new Sound(R.raw.fish_sound_v2);
+	public static final Sound EAT_SOUND = new Sound(R.raw.food_eaten_v2);
+	public static final Sound SPLAT = new Sound(R.raw.splat);
 }

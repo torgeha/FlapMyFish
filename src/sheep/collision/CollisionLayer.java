@@ -55,7 +55,8 @@ public class CollisionLayer extends Layer implements SpriteContainer {
 	
 	@Override
 	public void draw(Canvas canvas, BoundingBox box) {
-		for(int i = 0; i < sprites.size(); i++) {
+//		for(int i = 0; i < sprites.size(); i++) {
+		for(int i = sprites.size()-1; i >= 0; i--) {
 			sprites.elementAt(i).draw(canvas);
 		}
 	}
