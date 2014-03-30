@@ -44,10 +44,12 @@ public class MainActivity extends MultiplayerActivity {
         Constants.SNIPPET_WIDTH = Constants.WINDOW_WIDTH/3;
                 
         Constants.PLAYER_FLAP_SPEED = (int)(0.45f*Constants.WINDOW_HEIGHT);
-        Constants.PLAYER_SINK_SPEED = (int)(0.35f*Constants.WINDOW_HEIGHT);
-        Constants.PLAYER_SINK_ACCELERATION = (int)(0.80f*Constants.WINDOW_HEIGHT);
+        Constants.PLAYER_FLAP_ACCELERATION = Constants.WINDOW_HEIGHT;
+        Constants.PLAYER_MAX_FLAP_SPEED = 0.5f*Constants.WINDOW_HEIGHT;
+        Constants.PLAYER_SINK_SPEED = (int)(0.45f*Constants.WINDOW_HEIGHT);
+        Constants.PLAYER_SINK_ACCELERATION = (int)(/*0.80f**/Constants.WINDOW_HEIGHT);
         Constants.BACKGROUND_SPEED = (int)(0.08f*Constants.WINDOW_WIDTH);
-        Constants.MAX_ENEMY_SPEED = (int)(0.2f*Constants.WINDOW_WIDTH);
+        Constants.MAX_ENEMY_SPEED = (int)(0.4f*Constants.WINDOW_WIDTH);
         
         //Get the screen's density scale
         Constants.SCALE = getResources().getDisplayMetrics().density;
