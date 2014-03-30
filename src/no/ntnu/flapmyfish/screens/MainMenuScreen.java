@@ -81,8 +81,6 @@ public class MainMenuScreen extends State implements WidgetListener {
 		Widget source = action.getSource();
 		if (source == btns.get(0)){
 			//Single player
-			//getGame().popState();
-			//listener.buttonClicked(BTN_ID_SINGLE_PLAYER);
 			removeAllTouchListeners();
 			System.out.println("From main menu");
 			MainActivity.getControllerInstance().gameStateChanged(GameState.START_SP);

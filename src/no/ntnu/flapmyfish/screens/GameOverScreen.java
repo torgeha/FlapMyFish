@@ -34,20 +34,15 @@ public class GameOverScreen extends State implements WidgetListener{
 	private void init() {
 		gameOverBackground = new ExtendedSprite(new Image(R.drawable.game_over));
 		gameOverBackground.setSizeByHeight(1.2f);
-//		gameOverBackground.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
-//		gameOverBackground.setOffset(0, 0);
 		gameOverBackground.setPosition(Constants.WINDOW_WIDTH/2, Constants.WINDOW_HEIGHT/2);
-//		gameOverBackground.setPosition(gameOverBackground.getWidth(), 0);
 		generateButtons(new String[]{"Main menu", "Play again"});
 		
 		textPaint = GraphicsUtils.createPaint(32*Constants.SCALE, Color.WHITE, true);
 		
 		if (MainActivity.getControllerInstance().getCurrentGameScreenType() == GameScreenType.SINGLEPLAYER){
-			//gameOverMessage = "Score: "+MainActivity.getCurrentGameScreen().getPlayerScore();
 			if (MainActivity.getCurrentGameScreen().hasNewHighscore()) gameOverMessage = "New highscore!";
 			else gameOverMessage = "";
 		} else if (MainActivity.getControllerInstance().getCurrentGameScreenType() == GameScreenType.MULTIPLAYER){
-			//gameOverMessage = "Your score: "+MainActivity.getCurrentGameScreen().getPlayerScore()+"\nOpponent score: "+((MultiplayerGameScreen) MainActivity.getCurrentGameScreen()).getOpponentScore();
 			MultiplayerGameScreen currentMpGameScreen = (MultiplayerGameScreen) MainActivity.getCurrentGameScreen();
 			if (currentMpGameScreen.opponentIsKilled()){
 				setFinishedMpGameOverMessage(currentMpGameScreen);
