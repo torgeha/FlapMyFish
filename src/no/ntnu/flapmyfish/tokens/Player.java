@@ -36,12 +36,14 @@ public class Player extends Fish implements TouchListener {
 		}
 
 		super.update(dt);
-		if (getSpeed().getY() >= Constants.PLAYER_SINK_SPEED) setAcceleration(0, 0); //Stops accelerating after maximum speed is reached.
+		if (getSpeed().getY() >= Constants.PLAYER_SINK_SPEED || getSpeed().getY() <= -Constants.PLAYER_MAX_FLAP_SPEED) setAcceleration(0, 0); //Stops accelerating after maximum speed is reached.
 		fixPosition();
 		super.update(0);
 		
-		if(touchDown) setAcceleration(0, 0);
+		if(touchDown) setAcceleration(0, -Constants.PLAYER_FLAP_ACCELERATION);
 		else setAcceleration(0, Constants.PLAYER_SINK_ACCELERATION);
+		
+		setOrientation(20*getSpeed().getY()/Constants.PLAYER_MAX_FLAP_SPEED);
 	}
 	
 	
@@ -58,7 +60,7 @@ public class Player extends Fish implements TouchListener {
 		if((getPosition().getY()-getHeight()/2.0f)<=0){
 			//TOP
 			setPosition(getPosition().getX(), getHeight()/2.0f);
-			setSpeed(0, -getSpeed().getY());
+			setSpeed(0, Constants.PLAYER_FLAP_SPEED);
 //			if (!touchDown) setSpeed(0, 0);
 		} else if ((getPosition().getY()+getHeight()/2.0f)>=Constants.WINDOW_HEIGHT){
 			//BOTTOM
@@ -90,12 +92,13 @@ public class Player extends Fish implements TouchListener {
 	}
 	
 	private void sink() {
-		setSpeed(0, Constants.PLAYER_SINK_SPEED);
+//		setSpeed(0, Constants.PLAYER_SINK_SPEED);
+		setAcceleration(0, Constants.PLAYER_SINK_ACCELERATION);
 	}
 	
 	private void flap() {
-		setAcceleration(0, 0);
-		setSpeed(0, -Constants.PLAYER_FLAP_SPEED);
+		setSpeed(0, -.5f*Constants.PLAYER_FLAP_SPEED);
+		setAcceleration(0, -Constants.PLAYER_FLAP_ACCELERATION);
 		Constants.FLAP_SOUND.play();
 	}
 	

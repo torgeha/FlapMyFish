@@ -88,7 +88,7 @@ public class GameScreen extends State {
 		countDownTimer = new CountDownTimer(3, "GO!");
 		
 		levelString = LevelFactory.generateLevel();
-		level = new Level(levelString, colLayer, player);
+		setLevel(levelString);
 	}
 	
 	public String getLevelString(){

@@ -19,6 +19,7 @@ public class Constants {
 	
 	public static float PLAYER_FLAP_SPEED/* = 200*/;
 	public static float PLAYER_SINK_SPEED/* = 150*/;
+	public static float PLAYER_MAX_FLAP_SPEED;
 	public static float PLAYER_FLAP_ACCELERATION/* = 200*/;
 	public static float PLAYER_SINK_ACCELERATION/* = 200*/;
 	public static float BACKGROUND_SPEED/* = 50*/;
@@ -40,6 +41,7 @@ public class Constants {
 	public static final int NUMBER_OF_BLOCKS_X_DIR = 6;
 	public static final int NUMBER_OF_BLOCKS_Y_DIR = 6;
 	public static int SNIPPET_WIDTH;
+	public static int TIME_BETWEEN_SNIPPETS = 1;
 	
 	//Fonts
 	//public static final Font FONT_WHITE_SANS_BOLD_50 = new Font(255, 255, 255, 50f, Typeface.SANS_SERIF, Typeface.BOLD);

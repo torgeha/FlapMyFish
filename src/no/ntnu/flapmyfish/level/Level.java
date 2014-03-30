@@ -27,13 +27,13 @@ public class Level {
 	public void update(float dt) {
 		timePassed+=dt;
 //		if (timePassed >=3) {
-		if (timePassed >=4) {
+		if (timePassed >=Constants.TIME_BETWEEN_SNIPPETS) {
 			for (ExtendedSprite sprite : snippets[nextSnippet].getSprites()) {
 				collisionLayer.addSprite(sprite);
 			}
 			nextSnippet = (nextSnippet+1)%Constants.LEVEL_LENGTH;
 //			timePassed -= 3;
-			timePassed -= 4;
+			timePassed -= Constants.TIME_BETWEEN_SNIPPETS;
 		}
 	}
 }
