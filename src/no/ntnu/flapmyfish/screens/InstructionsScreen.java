@@ -33,7 +33,9 @@ public class InstructionsScreen extends State {
 	}
 	
 	public boolean onTouchUp(MotionEvent motionEvent) {
+		MainMenuScreen mainMenuScreen = new MainMenuScreen();
 		getGame().popState();
+		getGame().pushState(mainMenuScreen);
 		return true;
 	}
 }

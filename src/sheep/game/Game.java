@@ -111,6 +111,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 	public State getPreviousState() {
 		return thread.getPreviousState();
 	}
+	
+	/**
+	 * Gets the current State in the stack. (The one on the top).
+	 * @return The State on the top.
+	 */
+	public State getCurrentState() {
+		return thread.getCurrentState();
+	}
 
 	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {

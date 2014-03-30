@@ -5,6 +5,7 @@ import no.ntnu.flapmyfish.ExtendedLayer;
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
 import no.ntnu.flapmyfish.MainActivity;
 import no.ntnu.flapmyfish.R;
+import no.ntnu.flapmyfish.controller.GameController.GameScreenType;
 import no.ntnu.flapmyfish.controller.StateListener.GameState;
 import no.ntnu.flapmyfish.level.Level;
 import no.ntnu.flapmyfish.level.LevelFactory;
@@ -20,11 +21,12 @@ import sheep.game.Sprite;
 import sheep.game.State;
 import sheep.game.World;
 import android.graphics.Canvas;
+import android.view.MotionEvent;
 
 public class GameScreen extends State {
 
 	protected World world;
-	protected ScoreBoard score;
+	protected ScoreBoard scoreBoard;
 	
 	private LoopingBackgroundLayer loopingBgLayer;
 	private CollisionLayer colLayer;
@@ -33,6 +35,7 @@ public class GameScreen extends State {
 	private CountDownTimer countDownTimer;
 	private Player player;
 	private String levelString;
+	private boolean newHighscore;
 
 	public GameScreen() {
 		init();
@@ -79,8 +82,8 @@ public class GameScreen extends State {
 		addTouchListener(player);
 		colLayer.addSprite(player);
 		
-		score = new ScoreBoard(player);
-		foregroundLayer.addSprite(score);
+		scoreBoard = new ScoreBoard(player);
+		foregroundLayer.addSprite(scoreBoard);
 		
 		countDownTimer = new CountDownTimer(3, "GO!");
 		
@@ -122,7 +125,7 @@ public class GameScreen extends State {
 			}
 			else if (b instanceof Enemy && !collidedWithShark) {
 				//TODO: kill player, save score if new highscore, game over.
-				
+				removeAllTouchListeners();
 				Enemy enemy = (Enemy)b;
 				enemy.closeJaws();
 				Constants.SPLAT.play();
@@ -138,10 +141,24 @@ public class GameScreen extends State {
 			player.die();
 			if (Constants.HIGHSCORE < player.getPoints()) {
 				Constants.HIGHSCORE = player.getPoints();
+				newHighscore = true;
 			}
-			MainActivity.getListenerInstance().gameStateChanged(GameState.END_MATCH);
-			getGame().pushState(new GameOverScreen());
-			
+			if (MainActivity.getControllerInstance().getCurrentGameScreenType() == GameScreenType.MULTIPLAYER){
+				MultiplayerGameScreen mpGameScreen = (MultiplayerGameScreen) MainActivity.getCurrentGameScreen();
+				if (mpGameScreen.opponentIsKilled()){
+					MainActivity.getControllerInstance().gameStateChanged(GameState.FINISH_MP);
+				} else {
+					MainActivity.getControllerInstance().gameStateChanged(GameState.WAITING_FOR_OPPONENT_TO_FINISH);					
+				}
+			}
+			else if (MainActivity.getControllerInstance().getCurrentGameScreenType() == GameScreenType.SINGLEPLAYER){
+				MainActivity.getControllerInstance().gameStateChanged(GameState.FINISH_SP);
+			}
 		}
 	}
+	
+	public boolean hasNewHighscore(){
+		return newHighscore;
+	}
+	
 }

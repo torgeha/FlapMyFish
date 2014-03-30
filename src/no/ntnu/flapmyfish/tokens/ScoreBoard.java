@@ -16,8 +16,12 @@ public class ScoreBoard extends Token {
 		init(player);
 	}
 	
-	public void setOpponentPoints(int score){
+	public void setOpponentScore(int score){
 		opponentScore = score;
+	}
+	
+	public int getOpponentScore(){
+		return opponentScore;
 	}
 
 	public void setMultiplayer(boolean isMultiplayer) {

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import no.ntnu.flapmyfish.Constants;
 import no.ntnu.flapmyfish.LoopingBackgroundLayer;
+import no.ntnu.flapmyfish.MainActivity;
 import no.ntnu.flapmyfish.R;
 import no.ntnu.flapmyfish.controller.StateListener;
 import no.ntnu.flapmyfish.controller.StateListener.GameState;
 import no.ntnu.flapmyfish.gui.ImageButton;
 import no.ntnu.flapmyfish.tokens.ExtendedSprite;
+import sheep.game.Game;
 import sheep.game.State;
 import sheep.graphics.Image;
 import sheep.gui.Widget;
@@ -26,13 +28,6 @@ public class MainMenuScreen extends State implements WidgetListener {
 	public static final int BTN_ID_SINGLE_PLAYER = 500;
 	public static final int BTN_ID_MULTI_PLAYER = 501;
 	public static final int BTN_ID_INSTRUCTIONS = 502;
-	
-	private StateListener listener;
-	
-	public MainMenuScreen(StateListener listener){
-		this();
-		setStateListener(listener);
-	}
 
 	public MainMenuScreen(){
 		init();
@@ -50,10 +45,6 @@ public class MainMenuScreen extends State implements WidgetListener {
 		loopingBgLayer.update(dt);
 	}
 	
-	public void setStateListener(StateListener listener){
-		this.listener = listener;
-	}
-
 	public void init(){
 		loopingBgLayer = new LoopingBackgroundLayer(R.drawable.background);
 		headerLogo = new ExtendedSprite(new Image(R.drawable.header));
@@ -77,6 +68,13 @@ public class MainMenuScreen extends State implements WidgetListener {
 			btns.add(btn);
 		}
 	}
+	
+	/*private void removeAllTouchListeners(){
+		for (ImageButton btn :btns){
+			btn.removeWidgetListener(this);
+			removeTouchListener(btn);
+		}
+	}*/
 
 	@Override
 	public void actionPerformed(WidgetAction action) {
@@ -84,16 +82,20 @@ public class MainMenuScreen extends State implements WidgetListener {
 		if (source == btns.get(0)){
 			//Single player
 			//getGame().popState();
-			listener.buttonClicked(BTN_ID_SINGLE_PLAYER);
-			listener.gameStateChanged(GameState.START_SP);
+			//listener.buttonClicked(BTN_ID_SINGLE_PLAYER);
+			removeAllTouchListeners();
+			System.out.println("From main menu");
+			MainActivity.getControllerInstance().gameStateChanged(GameState.START_SP);
 			//getGame().pushState(new GameScreen());
 		} else if (source == btns.get(1)){
 			//Multiplayer
-			listener.buttonClicked(BTN_ID_MULTI_PLAYER);
+			MainActivity.getControllerInstance().buttonClicked(BTN_ID_MULTI_PLAYER);
 		} else if (source == btns.get(2)){
 			//Instructions
-			listener.buttonClicked(BTN_ID_INSTRUCTIONS);
-			getGame().pushState(new InstructionsScreen());
+			removeAllTouchListeners();
+			InstructionsScreen instructionsScreen = new InstructionsScreen();
+			getGame().popState();
+			getGame().pushState(instructionsScreen);
 		}
 	}
 

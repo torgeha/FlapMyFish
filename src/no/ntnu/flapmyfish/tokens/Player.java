@@ -105,7 +105,7 @@ public class Player extends Fish implements TouchListener {
 		touchDown = true;
 		frameDuration = initialFrameDuration/2.0f;
 //		frameTimeLeft += frameDuration;
-		return false;
+		return true;
 	}
 	
 	@Override
@@ -113,12 +113,12 @@ public class Player extends Fish implements TouchListener {
 		touchDown = false;
 		frameDuration = initialFrameDuration;
 		setAcceleration(0, Constants.PLAYER_SINK_ACCELERATION);
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean onTouchMove(MotionEvent event) {
-		return false;
+		return true;
 	}
 
 }

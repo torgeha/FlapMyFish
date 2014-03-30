@@ -76,6 +76,7 @@ public class GameThread extends Thread implements KeyboardListener, TouchListene
 			
 	}
 	
+	
 	@Override
 	public void run() {
 		while (running) {
@@ -119,6 +120,21 @@ public class GameThread extends Thread implements KeyboardListener, TouchListene
 	 */
 	public boolean isRunning() {
 		return running;
+	}
+	
+	/**
+	 * Gets the current State in the stack. (The one on the top).
+	 * @return The State on the top.
+	 */
+	public synchronized sheep.game.State getCurrentState() {
+		
+		int n = states.size();
+		
+		if(n < 1) {
+			return null;
+		}
+		
+		return states.elementAt(n-1);
 	}
 	
 	/**

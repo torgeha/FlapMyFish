@@ -24,6 +24,7 @@ package sheep.game;
 
 import java.util.LinkedList;
 
+import no.ntnu.flapmyfish.gui.ImageButton;
 import sheep.input.KeyboardListener;
 import sheep.input.TouchListener;
 import android.graphics.Canvas;
@@ -85,6 +86,10 @@ public class State implements KeyboardListener, TouchListener {
 	 */
 	public void removeTouchListener(TouchListener listener) {
 		this.touchListeners.remove(listener);
+	}
+	
+	public void removeAllTouchListeners(){
+		this.touchListeners.clear();
 	}
 	
 	/**

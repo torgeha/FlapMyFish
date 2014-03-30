@@ -1,6 +1,6 @@
 package no.ntnu.flapmyfish;
 
-import no.ntnu.flapmyfish.controller.GameListener;
+import no.ntnu.flapmyfish.controller.GameController;
 import no.ntnu.flapmyfish.level.LevelSnippet;
 import no.ntnu.flapmyfish.screens.GameScreen;
 import no.ntnu.flapmyfish.screens.MainMenuScreen;
@@ -16,19 +16,19 @@ public class MainActivity extends MultiplayerActivity {
 
 	private Game game;
 	
-	private static GameListener MAIN_LISTENER;
+	private static GameController MAIN_CONTROLLER;
 	
 	//Volume for sound
 	public static float volume = Constants.DEFAULT_VOLUME;
 	
-	public static GameListener getListenerInstance(){
-		return MAIN_LISTENER;
+	public static GameController getControllerInstance(){
+		return MAIN_CONTROLLER;
 	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		MAIN_LISTENER = this;
+		MAIN_CONTROLLER = this;
 		game = new Game(this, null);
 		
 //		  DisplayMetrics dm = new DisplayMetrics();
@@ -57,7 +57,7 @@ public class MainActivity extends MultiplayerActivity {
         int score = prefs.getInt("myHighscore", 0);
         Constants.HIGHSCORE = score;
 		
-		game.pushState(new MainMenuScreen(this));
+		game.pushState(new MainMenuScreen());
         
         //necessary for reading of levelsnippet file
         LevelSnippet.am = getAssets();
